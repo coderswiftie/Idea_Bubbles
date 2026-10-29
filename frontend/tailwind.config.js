@@ -7,49 +7,58 @@ export default {
   theme: {
     extend: {
       colors: {
-        midnight: {
-          950: '#07090D',
-          900: '#0B0D12', // Canvas Background
-          800: '#131722', // Secondary Surfaces / Cards
-          700: '#191E2A', // Elevated / Borders
-          600: '#22293A',
-        },
         ivory: {
-          50: '#FCFAF7',
-          100: '#F4F0E8', // Primary Soft Ivory Text
-          200: '#E4DFD3',
-          300: '#C7BFAC',
+          DEFAULT: '#FAF7F2',
+          50: '#FFFFFF',
+          100: '#FDFBF7',
+          200: '#FAF7F2',
+          300: '#F4ECE4',
+          400: '#EAE1D6',
         },
-        cosmic: {
-          lavender: '#8B5CF6',
-          coral: '#F43F5E',
-          cyan: '#06B6D4',
-          amber: '#F59E0B',
-          mint: '#10B981',
-          indigo: '#6366F1',
-          sky: '#38BDF8',
-          slate: '#94A3B8',
+        charcoal: {
+          DEFAULT: '#242220',
+          50: '#F7F6F4',
+          100: '#EAE8E3',
+          200: '#CEC9C1',
+          400: '#8A847C',
+          600: '#4D4741',
+          800: '#2A2623',
+          900: '#1D1A18',
+        },
+        iridescent: {
+          pink: '#F8B4C4',
+          lavender: '#D8C5F4',
+          cyan: '#9DE3EC',
+          gold: '#FCE09B',
+          mint: '#BEEAD5',
+          peach: '#FBC5A9',
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        handwriting: ['"Dancing Script"', '"Caveat"', 'cursive'],
+        cursive: ['"Caveat"', '"Dancing Script"', 'cursive'],
+        editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['"Quicksand"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'glow-lavender': '0 0 25px -5px rgba(139, 92, 246, 0.4)',
-        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
-        'glow-coral': '0 0 25px -5px rgba(244, 63, 94, 0.4)',
-        'glow-mint': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
-        'glow-amber': '0 0 25px -5px rgba(245, 158, 11, 0.4)',
+        'glass-subtle': '0 4px 20px -2px rgba(100, 90, 80, 0.05), 0 2px 6px -1px rgba(100, 90, 80, 0.03)',
+        'glass-elevated': '0 20px 40px -10px rgba(80, 70, 60, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.04)',
+        'bubble-glow': '0 0 25px -4px rgba(220, 205, 245, 0.45)',
+        'bubble-hover': '0 0 35px 2px rgba(175, 225, 240, 0.55), 0 10px 25px -5px rgba(235, 180, 200, 0.35)',
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float-gentle': 'float 6s ease-in-out infinite',
+        'float-slow': 'float 7s ease-in-out infinite',
+        'shimmer': 'shimmer 4s ease-in-out infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
+        shimmer: {
+          '0%, 100%': { opacity: '0.6' },
+          '50%': { opacity: '1' },
         }
       }
     },

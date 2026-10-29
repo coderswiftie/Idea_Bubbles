@@ -43,11 +43,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-950/80 backdrop-blur-md animate-in fade-in duration-150">
-      <div className="w-full max-w-sm bg-midnight-900 border border-midnight-700 rounded-2xl shadow-2xl p-6 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/20 backdrop-blur-md animate-in fade-in duration-150">
+      <div className="w-full max-w-sm bg-white/95 backdrop-blur-2xl border border-stone-200/90 rounded-3xl shadow-2xl p-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white"
+          className="absolute top-4 right-4 text-stone-400 hover:text-charcoal transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -55,17 +55,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         {user && user.email !== 'explorer@ideabubbles.universe' ? (
           /* Profile & Logout */
           <div className="space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-cosmic-lavender/20 border border-cosmic-lavender/50 mx-auto flex items-center justify-center text-cosmic-lavender font-bold text-lg">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-iridescent-lavender/30 to-iridescent-pink/30 border border-stone-200 mx-auto flex items-center justify-center text-charcoal font-bold text-lg shadow-sm">
               {user.display_name?.charAt(0).toUpperCase() || 'U'}
             </div>
             <div>
-              <h3 className="text-sm font-bold text-ivory-100">{user.display_name}</h3>
-              <p className="text-xs text-slate-400">{user.email}</p>
+              <h3 className="font-serif text-base font-bold text-charcoal">{user.display_name}</h3>
+              <p className="text-xs text-stone-400 font-sans">{user.email}</p>
             </div>
-            <div className="pt-4 border-t border-midnight-700">
+            <div className="pt-4 border-t border-stone-100">
               <button
                 onClick={handleLogout}
-                className="w-full py-2 px-3 rounded-xl bg-midnight-800 hover:bg-midnight-700 text-cosmic-coral text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                className="w-full py-2 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-rose-200 shadow-sm"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span>Sign Out</span>
@@ -76,64 +76,64 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           /* Sign In / Sign Up Form */
           <div>
             <div className="text-center mb-5">
-              <h3 className="text-base font-bold text-ivory-100">
-                {isRegister ? 'Join Idea Bubbles' : 'Sign In to Universe'}
+              <h3 className="font-handwriting text-3xl font-bold text-charcoal">
+                {isRegister ? 'Join Idea Bubbles' : 'Welcome Back'}
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="font-editorial italic text-stone-400 text-sm mt-0.5">
                 {isRegister
-                  ? 'Create an isolated cosmic archive for your thoughts'
-                  : 'Welcome back to your constellation of ideas'}
+                  ? 'Create a personal, ethereal archive for your thoughts'
+                  : 'Step back into your luminous world of ideas'}
               </p>
             </div>
 
             {error && (
-              <div className="p-2.5 rounded-lg bg-cosmic-coral/10 border border-cosmic-coral/30 text-cosmic-coral text-xs mb-4">
+              <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs mb-4 font-sans">
                 {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3 font-sans">
               {isRegister && (
                 <div>
-                  <label className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">
+                  <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
                     Display Name
                   </label>
-                  <div className="flex items-center gap-2 bg-midnight-950 border border-midnight-700 rounded-xl px-3 py-2 text-xs focus-within:border-cosmic-lavender">
-                    <UserIcon className="w-4 h-4 text-slate-500" />
+                  <div className="flex items-center gap-2 bg-[#FAF7F2] border border-stone-200 rounded-xl px-3 py-2 text-xs focus-within:border-iridescent-lavender">
+                    <UserIcon className="w-4 h-4 text-stone-400" />
                     <input
                       type="text"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
                       placeholder="e.g. Leonardo"
-                      className="w-full bg-transparent text-ivory-100 placeholder-slate-500 focus:outline-none"
+                      className="w-full bg-transparent text-charcoal placeholder-stone-400 focus:outline-none"
                     />
                   </div>
                 </div>
               )}
 
               <div>
-                <label className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">
+                <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
                   Email Address
                 </label>
-                <div className="flex items-center gap-2 bg-midnight-950 border border-midnight-700 rounded-xl px-3 py-2 text-xs focus-within:border-cosmic-lavender">
-                  <Mail className="w-4 h-4 text-slate-500" />
+                <div className="flex items-center gap-2 bg-[#FAF7F2] border border-stone-200 rounded-xl px-3 py-2 text-xs focus-within:border-iridescent-lavender">
+                  <Mail className="w-4 h-4 text-stone-400" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@domain.com"
-                    className="w-full bg-transparent text-ivory-100 placeholder-slate-500 focus:outline-none"
+                    className="w-full bg-transparent text-charcoal placeholder-stone-400 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">
+                <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
                   Password
                 </label>
-                <div className="flex items-center gap-2 bg-midnight-950 border border-midnight-700 rounded-xl px-3 py-2 text-xs focus-within:border-cosmic-lavender">
-                  <Lock className="w-4 h-4 text-slate-500" />
+                <div className="flex items-center gap-2 bg-[#FAF7F2] border border-stone-200 rounded-xl px-3 py-2 text-xs focus-within:border-iridescent-lavender">
+                  <Lock className="w-4 h-4 text-stone-400" />
                   <input
                     type="password"
                     required
@@ -141,7 +141,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="At least 6 characters"
-                    className="w-full bg-transparent text-ivory-100 placeholder-slate-500 focus:outline-none"
+                    className="w-full bg-transparent text-charcoal placeholder-stone-400 focus:outline-none"
                   />
                 </div>
               </div>
@@ -149,20 +149,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 mt-2 rounded-xl bg-cosmic-lavender hover:bg-purple-600 text-white text-xs font-semibold shadow-glow-lavender transition-all disabled:opacity-50"
+                className="w-full py-2.5 mt-2 rounded-xl bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white text-xs font-semibold shadow-sm hover:opacity-95 transition-all disabled:opacity-50"
               >
                 {loading ? 'Processing...' : isRegister ? 'Create Account' : 'Sign In'}
               </button>
             </form>
 
-            <div className="mt-4 pt-3 border-t border-midnight-700 text-center">
+            <div className="mt-4 pt-3 border-t border-stone-100 text-center font-sans">
               <button
                 type="button"
                 onClick={() => {
                   setIsRegister(!isRegister);
                   setError('');
                 }}
-                className="text-xs text-cosmic-lavender hover:underline"
+                className="text-xs text-stone-500 hover:text-charcoal underline"
               >
                 {isRegister
                   ? 'Already have an account? Sign in'

@@ -447,3 +447,75 @@ Let's trace how a **Note** is added to an idea:
 2. [`backend/app/api/v1/ideas.py`](file:///Users/srishti/Projects/idea_bubbles/backend/app/api/v1/ideas.py) — Understand how capture, retrieval, and updates are processed.
 3. [`frontend/src/components/canvas/UniverseCanvas.tsx`](file:///Users/srishti/Projects/idea_bubbles/frontend/src/components/canvas/UniverseCanvas.tsx) — Understand the 2D physics engine and bubble movement.
 4. [`frontend/src/components/workspace/IdeaWorkspace.tsx`](file:///Users/srishti/Projects/idea_bubbles/frontend/src/components/workspace/IdeaWorkspace.tsx) — Understand how idea tabs, notes, tasks, and AI chat are unified.
+
+---
+
+## 14. Aesthetic Redesign: Ethereal Daylight World & Soap Bubble Physics
+
+### Philosophy: Moving Away from SaaS Dashboards
+Standard productivity tools resemble administrative databases: dark or stark-white grids, rigid rectangular card matrices, dense uppercase tracking labels (`text-[10px] uppercase`), and opaque solid icons. 
+
+The Idea Bubbles redesign completely departs from this paradigm. It transforms the environment into an **artist's dream journal and living observatory**:
+- **Palette**: Warm pearl-white, milky ivory (`#FAF7F2`), and soft pastel daylight tones with gentle ambient radial illumination.
+- **Atmosphere**: Open breathing room, soft deckled-edge paper cards, delicate shadows, and zero harsh technical borders.
+- **Centerpiece**: Ideas float as **physically convincing, optically accurate iridescent soap bubbles** in daylight.
+
+---
+
+### Optical Soap Bubble Rendering Techniques
+Implemented on HTML5 Canvas in [`UniverseCanvas.tsx`](file:///Users/srishti/Projects/idea_bubbles/frontend/src/components/canvas/UniverseCanvas.tsx), the bubble renderer relies on multi-layer optical compositing rather than flat colored circles:
+
+1. **Strict Circular Geometry**:
+   - Every bubble is rendered strictly as an isotropic circle ($r_x = r_y = r$) using canvas `ctx.arc(x, y, r, 0, Math.PI * 2)`.
+   - Never squashed, stretched, or distorted during velocity changes, dragging, or collisions. Variety is achieved purely through diameter scaling based on idea importance and note density ($50\text{px} \le r \le 82\text{px}$).
+
+2. **Ambient Diffused Ground Shadow**:
+   - Soap bubbles refract light downward, casting an extremely soft, warm, pale shadow slightly offset from the sphere ($dx = 3\text{px}, dy = r \times 0.25$, blur $r \times 0.45$, opacity $0.07$).
+
+3. **97% Transparent Core Interior**:
+   - Real soap bubbles are thin films containing air; the background must remain clearly visible through them.
+   - A multi-stop radial gradient offset toward the daylight source (`x - r*0.22, y - r*0.26`) provides spherical curvature without obscuring transparency:
+     - Center ($0\%$ to $50\%$ radius): `rgba(255, 255, 255, 0.06)` down to `0.015`.
+     - Outer edge ($82\%$ to $100\%$ radius): subtle ethereal tint `rgba(240, 246, 255, 0.05)` to `rgba(255, 238, 245, 0.18)` at the grazing angle.
+
+4. **Thin-Film Iridescent Rainbow Interference Rim**:
+   - In physical optics, constructive and destructive interference of light waves reflecting off the outer and inner soap surfaces yields shifting spectral bands.
+   - Rendered using a linear gradient whose angle smoothly rotates over time ($\theta(t) = 0.0005 \cdot t + \phi_{\text{bubble}}$):
+     - Rose blush (`#F8B4C4`) $\rightarrow$ Luminous cyan (`#9DE3EC`) $\rightarrow$ Champagne gold (`#FCE09B`) $\rightarrow$ Delicate lilac (`#D8C5F4`) $\rightarrow$ Pale mint (`#BEEAD5`).
+   - Accompanied by an inner concentric white contour ring ($r - 1.4\text{px}$, width $0.8\text{px}$) representing internal total reflection.
+
+5. **Physically Accurate Curved Crescent Specular Reflection**:
+   - Spherical glass and soap bubbles are recognized by the viewer's eye because reflections follow the curvature of the sphere.
+   - **Curved Arc**: An outer white arc (`lineCap = 'round'`) along $r - 2.2\text{px}$ spanning angle $-0.85\pi$ to $-0.22\pi$.
+   - **Elliptical Reflection Glint**: Feathered white linear gradient inside the upper-left curvature (`-45°` rotation).
+   - **Daylight Pinpoint Sparkle**: A bright $2\text{px}$ glint at $(x - 0.46r, y - 0.44r)$ with $0.98$ opacity.
+
+6. **Secondary Bottom-Right Refraction**:
+   - Reflected ground bounce along the lower perimeter (arc from $0.15\pi$ to $0.65\pi$) with soft cyan/lilac pastel glow.
+
+7. **Pure Legible Typography (Zero Opaque Backing Boxes)**:
+   - Eliminates all rectangular pill labels inside the sphere.
+   - Text is rendered directly in deep warm charcoal (`#242220`) with a luminous white diffused text shadow (`shadowColor: 'rgba(255, 255, 255, 0.95)', shadowBlur: 6`), making letters 100% legible over any background while maintaining pure bubble transparency.
+   - Larger bubbles render an expressive handwritten category or spark note in `Caveat` cursive underneath the title.
+
+---
+
+### Organic Physics Simulation
+- **Harmonic Sinusoidal Drift**: Each bubble $i$ calculates micro-current velocities using independent angular frequencies:
+  $$v_{x} \mathrel{+}= \cos(0.75 \phi_i + 1.2 i) \cdot 0.07, \quad v_{y} \mathrel{+}= \sin(0.65 \phi_i + 0.9 i) \cdot 0.09$$
+- **2-Body Elastic Collisions**: When distance $d < r_1 + r_2 + 6\text{px}$, bubbles softly separate without squashing, exchanging momentum with an elasticity coefficient of $0.82$.
+- **Boundary Cushioning**: Gentle elastic rebound off screen perimeters with restitution $0.85$.
+- **Interactive Drag & Hover**: Smooth mouse and touch listeners (`onTouchStart`, `onTouchMove`, `onTouchEnd`) allow fluid manipulation on desktop and mobile while preserving circular geometry.
+
+---
+
+### Typography Hierarchy: Soft, Flowing, and Humanist
+All rigid geometric and all-caps dashboard typography has been replaced:
+1. **Handwriting Branding & Prominent Titles**:
+   - **Dancing Script** & **Caveat**: Used for `"Idea Bubbles"`, main view titles (`"Journal of Ideas"`), and personal notes.
+2. **Editorial Accents**:
+   - **Cormorant Garamond (Italic)**: Used for subtitles (`"a gentle universe of floating thoughts"`), status descriptors, date stamps, and section leads.
+3. **Humanist Body Sans**:
+   - **Quicksand** & **Plus Jakarta Sans**: Rounded, organic sans-serif for inputs, descriptions, and workspace reading.
+4. **Sentence Case Exclusivity**:
+   - Eradicated all `uppercase tracking-wider text-[10px]` classes across all 7 workspace tabs, modals, and views.

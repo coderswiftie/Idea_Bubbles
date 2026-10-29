@@ -4,21 +4,21 @@ import { useIdeas } from '../../context/IdeaContext';
 import { api } from '../../services/api';
 
 const COLOR_PRESETS = [
-  '#F43F5E', // Coral
-  '#38BDF8', // Sky
-  '#8B5CF6', // Lavender
-  '#2DD4BF', // Mint/Cyan
-  '#FBBF24', // Amber
+  '#F472B6', // Blush pink
+  '#38BDF8', // Pale cyan
+  '#A78BFA', // Subtle lavender
+  '#34D399', // Mint
+  '#FBBF24', // Champagne / Gold
   '#FB7185', // Rose
-  '#818CF8', // Indigo
-  '#94A3B8', // Slate
+  '#818CF8', // Periwinkle
+  '#A8A29E', // Warm stone
 ];
 
 export const CategoriesView: React.FC = () => {
   const { categories, refreshCategories, refreshIdeas } = useIdeas();
   const [isAdding, setIsAdding] = useState(false);
   const [newCatName, setNewCatName] = useState('');
-  const [newCatColor, setNewCatColor] = useState('#8B5CF6');
+  const [newCatColor, setNewCatColor] = useState('#A78BFA');
   const [editingCatId, setEditingCatId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [editColor, setEditColor] = useState('');
@@ -63,34 +63,34 @@ export const CategoriesView: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen pt-20 pb-16 px-4 md:px-8 max-w-4xl mx-auto overflow-y-auto">
+    <div className="w-full min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-4xl mx-auto overflow-y-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-ivory-100 flex items-center gap-2">
-            <FolderTree className="w-5 h-5 text-cosmic-amber" />
+          <h2 className="font-handwriting text-3xl font-bold text-charcoal flex items-center gap-2.5">
+            <FolderTree className="w-5 h-5 text-iridescent-gold" />
             <span>Idea Categories</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Organize and color-code the celestial clusters in your idea universe
+          <p className="font-editorial italic text-stone-400 text-sm mt-0.5">
+            Organize and color-tint the clusters in your thought universe
           </p>
         </div>
 
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cosmic-lavender hover:bg-purple-600 text-white flex items-center gap-1.5 transition-all shadow-glow-lavender"
+            className="px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-iridescent-lavender via-iridescent-pink/70 to-iridescent-cyan text-charcoal flex items-center gap-1.5 transition-all shadow-sm hover:opacity-95"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>New Category</span>
+            <span className="font-editorial italic text-sm">New Category</span>
           </button>
         )}
       </div>
 
       {/* Add Category Form */}
       {isAdding && (
-        <form onSubmit={handleCreate} className="glass-panel p-4 rounded-2xl mb-6 space-y-3">
-          <h3 className="text-xs font-bold text-ivory-100 uppercase tracking-wider">
+        <form onSubmit={handleCreate} className="bg-white/90 border border-stone-200/90 p-5 rounded-2xl mb-6 space-y-3 shadow-sm">
+          <h3 className="font-handwriting text-2xl font-bold text-charcoal">
             Create Custom Category
           </h3>
           <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -100,7 +100,7 @@ export const CategoriesView: React.FC = () => {
               onChange={(e) => setNewCatName(e.target.value)}
               placeholder="Category name (e.g. Creative Writing, Robotics)..."
               autoFocus
-              className="w-full bg-midnight-900 border border-midnight-700 rounded-xl px-3 py-2 text-xs text-ivory-100 placeholder-slate-500 focus:outline-none focus:border-cosmic-lavender"
+              className="w-full bg-[#FAF7F2] border border-stone-200 rounded-xl px-3.5 py-2 text-xs text-charcoal placeholder-stone-400 focus:outline-none focus:border-iridescent-lavender font-sans"
             />
             {/* Color Presets */}
             <div className="flex items-center gap-1.5 shrink-0">
@@ -110,7 +110,7 @@ export const CategoriesView: React.FC = () => {
                   type="button"
                   onClick={() => setNewCatColor(color)}
                   className={`w-6 h-6 rounded-full border-2 transition-transform ${
-                    newCatColor === color ? 'scale-125 border-white' : 'border-transparent'
+                    newCatColor === color ? 'scale-125 border-stone-600 shadow-sm' : 'border-transparent'
                   }`}
                   style={{ backgroundColor: color }}
                 />
@@ -121,14 +121,14 @@ export const CategoriesView: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsAdding(false)}
-              className="px-3 py-1.5 rounded-lg text-xs text-slate-400 hover:text-ivory-100"
+              className="px-3.5 py-1.5 rounded-lg text-xs text-stone-500 hover:text-charcoal"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!newCatName.trim()}
-              className="px-4 py-1.5 bg-cosmic-lavender text-white rounded-lg text-xs font-semibold disabled:opacity-50"
+              className="px-4 py-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-xl text-xs font-semibold disabled:opacity-50 shadow-sm"
             >
               Create Category
             </button>
@@ -141,7 +141,7 @@ export const CategoriesView: React.FC = () => {
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="glass-panel p-4 rounded-2xl flex items-center justify-between group hover:border-slate-600 transition-all"
+            className="bg-white border border-stone-200/80 p-4.5 rounded-2xl flex items-center justify-between group hover:border-stone-300 transition-all shadow-sm"
           >
             {editingCatId === cat.id ? (
               <div className="flex-1 flex items-center gap-2 mr-2">
@@ -149,7 +149,7 @@ export const CategoriesView: React.FC = () => {
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="w-full bg-midnight-900 border border-cosmic-lavender rounded-lg px-2 py-1 text-xs text-ivory-100 focus:outline-none"
+                  className="w-full bg-[#FAF8F5] border border-iridescent-lavender rounded-xl px-2.5 py-1 text-xs text-charcoal focus:outline-none font-sans"
                 />
                 <div className="flex items-center gap-1 shrink-0">
                   {COLOR_PRESETS.map((c) => (
@@ -158,7 +158,7 @@ export const CategoriesView: React.FC = () => {
                       type="button"
                       onClick={() => setEditColor(c)}
                       className={`w-4 h-4 rounded-full border ${
-                        editColor === c ? 'border-white' : 'border-transparent'
+                        editColor === c ? 'border-stone-700' : 'border-transparent'
                       }`}
                       style={{ backgroundColor: c }}
                     />
@@ -166,7 +166,7 @@ export const CategoriesView: React.FC = () => {
                 </div>
                 <button
                   onClick={() => handleSaveEdit(cat.id)}
-                  className="p-1.5 bg-cosmic-lavender text-white rounded hover:bg-purple-600"
+                  className="p-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-lg hover:opacity-90 shadow-sm"
                 >
                   <Check className="w-3.5 h-3.5" />
                 </button>
@@ -174,15 +174,15 @@ export const CategoriesView: React.FC = () => {
             ) : (
               <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className="w-4 h-4 rounded-full shrink-0 shadow-sm"
+                  className="w-4 h-4 rounded-full shrink-0 shadow-sm border border-black/10"
                   style={{ backgroundColor: cat.color_hex }}
                 />
                 <div className="min-w-0">
-                  <h4 className="text-xs font-bold text-ivory-100 truncate">
+                  <h4 className="text-xs font-bold text-charcoal truncate font-sans">
                     {cat.name}
                   </h4>
-                  <p className="text-[10px] text-slate-500">
-                    {cat.idea_count || 0} {cat.idea_count === 1 ? 'idea' : 'ideas'}
+                  <p className="text-[10px] text-stone-400 font-sans">
+                    {cat.idea_count || 0} {cat.idea_count === 1 ? 'thought' : 'thoughts'}
                   </p>
                 </div>
               </div>
@@ -192,14 +192,14 @@ export const CategoriesView: React.FC = () => {
               <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => handleStartEdit(cat)}
-                  className="p-1.5 text-slate-400 hover:text-ivory-100 rounded-lg hover:bg-midnight-800"
+                  className="p-1.5 text-stone-400 hover:text-charcoal rounded-lg hover:bg-stone-100"
                   title="Edit category"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => handleDelete(cat.id)}
-                  className="p-1.5 text-slate-400 hover:text-cosmic-coral rounded-lg hover:bg-midnight-800"
+                  className="p-1.5 text-stone-400 hover:text-iridescent-pink rounded-lg hover:bg-stone-100"
                   title="Delete category"
                 >
                   <Trash2 className="w-3.5 h-3.5" />

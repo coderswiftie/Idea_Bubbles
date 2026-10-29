@@ -39,15 +39,15 @@ export const IdeaWorkspace: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-[540px] md:w-[600px] z-40 bg-midnight-950/95 border-l border-midnight-700/80 shadow-2xl backdrop-blur-2xl flex flex-col animate-in slide-in-from-right duration-200">
+    <div className="fixed inset-y-0 right-0 w-full sm:w-[540px] md:w-[600px] z-40 bg-[#FAF8F5]/98 backdrop-blur-2xl border-l border-stone-200/90 shadow-2xl flex flex-col animate-in slide-in-from-right duration-200">
       {/* Top Header */}
-      <div className="p-4 border-b border-midnight-700/80 flex items-center justify-between shrink-0 bg-midnight-900/60">
-        <div className="flex items-center gap-2.5 min-w-0 pr-2">
+      <div className="p-4 px-6 border-b border-stone-200/80 flex items-center justify-between shrink-0 bg-white/80">
+        <div className="flex items-center gap-3 min-w-0 pr-2">
           <div
-            className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm"
-            style={{ backgroundColor: selectedIdeaDetail?.category?.color_hex || '#8B5CF6' }}
+            className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm border border-black/10"
+            style={{ backgroundColor: selectedIdeaDetail?.category?.color_hex || '#B8A5E8' }}
           />
-          <h2 className="text-sm font-bold text-ivory-100 truncate">
+          <h2 className="font-serif text-base font-bold text-charcoal truncate">
             {selectedIdeaDetail?.title || 'Idea Workspace'}
           </h2>
         </div>
@@ -56,21 +56,21 @@ export const IdeaWorkspace: React.FC = () => {
           <button
             onClick={handleArchive}
             title="Archive Idea"
-            className="p-1.5 text-slate-400 hover:text-ivory-100 rounded-lg hover:bg-midnight-800 transition-colors"
+            className="p-1.5 text-stone-400 hover:text-charcoal rounded-lg hover:bg-stone-100 transition-colors"
           >
             <Archive className="w-4 h-4" />
           </button>
           <button
             onClick={handleDeletePermanent}
             title="Delete Permanently"
-            className="p-1.5 text-slate-400 hover:text-cosmic-coral rounded-lg hover:bg-midnight-800 transition-colors"
+            className="p-1.5 text-stone-400 hover:text-iridescent-pink rounded-lg hover:bg-stone-100 transition-colors"
           >
             <Trash2 className="w-4 h-4" />
           </button>
-          <div className="w-[1px] h-4 bg-midnight-700 mx-1" />
+          <div className="w-[1px] h-4 bg-stone-200 mx-1" />
           <button
             onClick={handleClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-midnight-800 transition-colors"
+            className="p-1.5 text-stone-400 hover:text-charcoal rounded-lg hover:bg-stone-100 transition-colors"
             title="Close Workspace"
           >
             <X className="w-4 h-4" />
@@ -79,31 +79,31 @@ export const IdeaWorkspace: React.FC = () => {
       </div>
 
       {/* Tabs Navigation */}
-      <div className="px-4 border-b border-midnight-700/60 flex items-center gap-1 overflow-x-auto py-2 shrink-0 bg-midnight-900/40">
+      <div className="px-5 border-b border-stone-200/70 flex items-center gap-1 overflow-x-auto py-2 shrink-0 bg-white/40">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'overview'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200 hover:bg-midnight-850'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5 text-cosmic-cyan" />
+          <Sparkles className="w-3.5 h-3.5 text-iridescent-cyan" />
           <span>Overview</span>
         </button>
 
         <button
           onClick={() => setActiveTab('notes')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'notes'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <FileText className="w-3.5 h-3.5 text-cosmic-sky" />
+          <FileText className="w-3.5 h-3.5 text-iridescent-lavender" />
           <span>Notes</span>
           {selectedIdeaDetail && selectedIdeaDetail.notes.length > 0 && (
-            <span className="text-[10px] bg-midnight-900 px-1.5 py-0.2 rounded-full text-slate-300">
+            <span className="text-[10px] bg-stone-100 px-1.5 py-0.2 rounded-full text-stone-600 font-sans font-semibold">
               {selectedIdeaDetail.notes.length}
             </span>
           )}
@@ -111,16 +111,16 @@ export const IdeaWorkspace: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('tasks')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'tasks'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <CheckSquare className="w-3.5 h-3.5 text-cosmic-mint" />
+          <CheckSquare className="w-3.5 h-3.5 text-iridescent-mint" />
           <span>Tasks</span>
           {selectedIdeaDetail && selectedIdeaDetail.tasks.length > 0 && (
-            <span className="text-[10px] bg-midnight-900 px-1.5 py-0.2 rounded-full text-slate-300">
+            <span className="text-[10px] bg-stone-100 px-1.5 py-0.2 rounded-full text-stone-600 font-sans font-semibold">
               {selectedIdeaDetail.tasks.filter((t) => t.is_completed).length}/{selectedIdeaDetail.tasks.length}
             </span>
           )}
@@ -128,16 +128,16 @@ export const IdeaWorkspace: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('references')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'references'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <Link2 className="w-3.5 h-3.5 text-cosmic-amber" />
+          <Link2 className="w-3.5 h-3.5 text-iridescent-gold" />
           <span>References</span>
           {selectedIdeaDetail && selectedIdeaDetail.references.length > 0 && (
-            <span className="text-[10px] bg-midnight-900 px-1.5 py-0.2 rounded-full text-slate-300">
+            <span className="text-[10px] bg-stone-100 px-1.5 py-0.2 rounded-full text-stone-600 font-sans font-semibold">
               {selectedIdeaDetail.references.length}
             </span>
           )}
@@ -145,34 +145,34 @@ export const IdeaWorkspace: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('connections')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'connections'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <GitFork className="w-3.5 h-3.5 text-cosmic-indigo" />
+          <GitFork className="w-3.5 h-3.5 text-iridescent-lavender" />
           <span>Connections</span>
         </button>
 
         <button
           onClick={() => setActiveTab('attachments')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'attachments'
-              ? 'bg-midnight-800 text-ivory-100 border border-midnight-700 shadow-sm'
-              : 'text-slate-400 hover:text-ivory-200'
+              ? 'bg-white text-charcoal border border-stone-200/80 shadow-sm font-semibold'
+              : 'text-stone-500 hover:text-charcoal hover:bg-white/60'
           }`}
         >
-          <Paperclip className="w-3.5 h-3.5 text-slate-400" />
+          <Paperclip className="w-3.5 h-3.5 text-stone-400" />
           <span>Files</span>
         </button>
 
         <button
           onClick={() => setActiveTab('ai')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0 ${
             activeTab === 'ai'
-              ? 'bg-cosmic-lavender text-white shadow-glow-lavender'
-              : 'text-cosmic-lavender hover:bg-cosmic-lavender/10'
+              ? 'bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white shadow-sm'
+              : 'text-iridescent-lavender hover:bg-iridescent-lavender/10'
           }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
@@ -181,11 +181,11 @@ export const IdeaWorkspace: React.FC = () => {
       </div>
 
       {/* Tab Body Content */}
-      <div className="flex-1 overflow-y-auto p-5">
+      <div className="flex-1 overflow-y-auto p-6">
         {!selectedIdeaDetail ? (
-          <div className="flex items-center justify-center h-48 text-slate-400 gap-2">
-            <Loader2 className="w-5 h-5 animate-spin text-cosmic-lavender" />
-            <span className="text-xs">Loading idea universe...</span>
+          <div className="flex items-center justify-center h-48 text-stone-400 gap-2">
+            <Loader2 className="w-5 h-5 animate-spin text-iridescent-lavender" />
+            <span className="text-xs">Opening journal page...</span>
           </div>
         ) : (
           <>

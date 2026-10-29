@@ -48,26 +48,26 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
       <div>
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h3 className="text-sm font-semibold text-ivory-100">Milestones & Tasks</h3>
-            <p className="text-xs text-slate-400">
+            <h3 className="font-handwriting text-2xl font-bold text-charcoal">Milestones & Tasks</h3>
+            <p className="font-editorial italic text-stone-400 text-sm">
               {completedTasks} of {totalTasks} completed ({progressPercent}%)
             </p>
           </div>
           {!isAdding && (
             <button
               onClick={() => setIsAdding(true)}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium bg-midnight-800 border border-midnight-700 hover:border-cosmic-lavender text-ivory-100 hover:text-white flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white border border-stone-200 hover:border-stone-300 text-charcoal hover:bg-stone-50 flex items-center gap-1.5 transition-all shadow-sm"
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Task</span>
+              <Plus className="w-3.5 h-3.5 text-iridescent-mint" />
+              <span className="font-editorial italic text-sm">Add Task</span>
             </button>
           )}
         </div>
 
         {totalTasks > 0 && (
-          <div className="w-full bg-midnight-800 rounded-full h-1.5 overflow-hidden">
+          <div className="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-cosmic-mint h-full transition-all duration-300 rounded-full"
+              className="bg-iridescent-mint h-full transition-all duration-300 rounded-full"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -76,16 +76,16 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
 
       {/* Convert to Active Project Banner */}
       {idea.status !== 'ACTIVE_PROJECT' && totalTasks >= 2 && (
-        <div className="bg-midnight-800/80 border border-cosmic-mint/30 rounded-xl p-3 flex items-center justify-between gap-3">
+        <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-sm">
           <div className="flex items-center gap-2.5">
-            <Rocket className="w-4 h-4 text-cosmic-mint shrink-0" />
-            <p className="text-xs text-ivory-200">
+            <Rocket className="w-4 h-4 text-emerald-600 shrink-0" />
+            <p className="text-xs text-emerald-900 font-sans">
               Ready to take this further? Convert this idea into an <strong>Active Project</strong>.
             </p>
           </div>
           <button
             onClick={handleConvertToProject}
-            className="px-3 py-1 bg-cosmic-mint/20 hover:bg-cosmic-mint/30 text-cosmic-mint border border-cosmic-mint/40 rounded-lg text-xs font-semibold shrink-0 transition-colors"
+            className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shrink-0 transition-colors shadow-sm"
           >
             Activate
           </button>
@@ -94,14 +94,14 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
 
       {/* Add Task Form */}
       {isAdding && (
-        <form onSubmit={handleAddTask} className="flex items-center gap-2 bg-midnight-800/90 border border-midnight-700 rounded-xl p-2.5">
+        <form onSubmit={handleAddTask} className="flex items-center gap-2 bg-white border border-stone-200/90 rounded-2xl p-3 shadow-sm">
           <input
             type="text"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             placeholder="What is the next step or milestone?..."
             autoFocus
-            className="flex-1 bg-transparent text-xs text-ivory-100 placeholder-slate-500 focus:outline-none px-2"
+            className="flex-1 bg-transparent text-xs text-charcoal placeholder-stone-400 focus:outline-none px-2 font-sans"
           />
           <button
             type="button"
@@ -109,14 +109,14 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
               setIsAdding(false);
               setNewTitle('');
             }}
-            className="px-2 py-1 text-xs text-slate-400 hover:text-ivory-100"
+            className="px-2.5 py-1 text-xs text-stone-500 hover:text-charcoal"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={!newTitle.trim()}
-            className="px-3 py-1 bg-cosmic-lavender text-white rounded-lg text-xs font-medium hover:bg-purple-600 disabled:opacity-50"
+            className="px-4 py-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-xl text-xs font-semibold hover:opacity-95 disabled:opacity-50 shadow-sm"
           >
             Add
           </button>
@@ -125,20 +125,20 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
 
       {/* Task List */}
       {idea.tasks.length === 0 && !isAdding ? (
-        <div className="text-center py-12 px-4 rounded-xl border border-dashed border-midnight-700">
-          <CheckCircle2 className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-          <p className="text-xs text-slate-400">No tasks defined</p>
-          <p className="text-[11px] text-slate-500 mt-1">Break your idea into small, exciting experiments or checklist items.</p>
+        <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-stone-200 bg-white/50">
+          <CheckCircle2 className="w-8 h-8 text-stone-300 mx-auto mb-2" />
+          <p className="text-xs font-medium text-stone-600">No tasks defined</p>
+          <p className="text-[11px] text-stone-400 mt-1">Break your idea into small, exciting experiments or checklist items.</p>
         </div>
       ) : (
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {idea.tasks.map((task) => (
             <div
               key={task.id}
-              className={`flex items-center justify-between p-3 rounded-xl border transition-all group ${
+              className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all group ${
                 task.is_completed
-                  ? 'bg-midnight-800/30 border-midnight-700/40 text-slate-400'
-                  : 'bg-midnight-800/70 border-midnight-700/80 text-ivory-100'
+                  ? 'bg-stone-50/80 border-stone-200/60 text-stone-400'
+                  : 'bg-white border-stone-200/80 text-charcoal shadow-sm hover:border-stone-300'
               }`}
             >
               <div
@@ -146,13 +146,13 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
                 className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
               >
                 {task.is_completed ? (
-                  <CheckCircle2 className="w-4 h-4 text-cosmic-mint shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 ) : (
-                  <Circle className="w-4 h-4 text-slate-500 hover:text-cosmic-lavender shrink-0 transition-colors" />
+                  <Circle className="w-4 h-4 text-stone-300 hover:text-emerald-500 shrink-0 transition-colors" />
                 )}
                 <span
-                  className={`text-xs select-none truncate ${
-                    task.is_completed ? 'line-through text-slate-500' : ''
+                  className={`text-xs select-none truncate font-sans ${
+                    task.is_completed ? 'line-through text-stone-400' : 'text-charcoal font-medium'
                   }`}
                 >
                   {task.title}
@@ -160,7 +160,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
               </div>
               <button
                 onClick={() => handleDeleteTask(task.id)}
-                className="p-1 text-slate-500 hover:text-cosmic-coral rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                className="p-1 text-stone-400 hover:text-iridescent-pink rounded opacity-0 group-hover:opacity-100 transition-opacity"
                 title="Delete task"
               >
                 <Trash2 className="w-3.5 h-3.5" />
