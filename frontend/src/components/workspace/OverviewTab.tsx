@@ -69,8 +69,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Title */}
       <div>
-        <label className="font-editorial italic text-cocoa-muted text-sm">
-          Thought Title
+        <label className="text-xs text-cocoa-muted font-sans">
+          title
         </label>
         {isEditingTitle ? (
           <input
@@ -80,17 +80,17 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
             onBlur={handleTitleBlur}
             onKeyDown={(e) => e.key === 'Enter' && handleTitleBlur()}
             autoFocus
-            className="w-full mt-1 bg-pearl border border-rose rounded-xl px-3.5 py-2 font-serif text-2xl font-bold text-cocoa focus:outline-none shadow-sm"
+            className="w-full mt-1 bg-pearl border border-powder-dark rounded-xl px-3.5 py-2 font-serif text-2xl font-bold text-cocoa focus:outline-none shadow-sm"
           />
         ) : (
           <h2
             onClick={() => setIsEditingTitle(true)}
-            className="mt-1 font-serif text-2xl font-bold text-cocoa cursor-pointer hover:text-rose-dark transition-colors flex items-center justify-between group"
+            className="mt-1 font-serif text-2xl font-bold text-cocoa cursor-pointer hover:text-cocoa-muted transition-colors flex items-center justify-between group"
             title="Click to edit title"
           >
             <span>{idea.title}</span>
-            <span className="text-xs font-normal text-cocoa-muted opacity-0 group-hover:opacity-100 transition-opacity font-editorial italic">
-              Click to edit
+            <span className="text-xs font-normal text-cocoa-muted opacity-0 group-hover:opacity-100 transition-opacity font-sans">
+              edit
             </span>
           </h2>
         )}
@@ -100,13 +100,13 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {/* Status Dropdown */}
         <div className="bg-pearl/90 border border-powder/70 rounded-2xl p-3 shadow-xs">
-          <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-            Status
+          <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+            status
           </label>
           <select
             value={idea.status}
             onChange={(e) => handleStatusChange(e.target.value as IdeaStatus)}
-            className="w-full bg-transparent text-xs font-semibold focus:outline-none cursor-pointer"
+            className="w-full bg-transparent text-xs font-medium focus:outline-none cursor-pointer"
             style={{ color: STATUS_CONFIG[idea.status]?.color || '#49363B' }}
           >
             {Object.keys(STATUS_CONFIG).map((s) => (
@@ -119,13 +119,13 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
 
         {/* Category Dropdown */}
         <div className="bg-pearl/90 border border-powder/70 rounded-2xl p-3 shadow-xs">
-          <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-            Collection
+          <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+            collection
           </label>
           <select
             value={idea.category_id || ''}
             onChange={(e) => handleCategoryChange(e.target.value)}
-            className="w-full bg-transparent text-xs text-cocoa font-semibold focus:outline-none cursor-pointer"
+            className="w-full bg-transparent text-xs text-cocoa font-medium focus:outline-none cursor-pointer"
           >
             <option value="" className="bg-pearl">Uncategorized</option>
             {categories.map((c) => (
@@ -138,8 +138,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
 
         {/* Priority Stars */}
         <div className="bg-pearl/90 border border-powder/70 rounded-2xl p-3 shadow-xs">
-          <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-            Preciousness
+          <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+            priority
           </label>
           <div className="flex items-center gap-1 mt-0.5">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -158,11 +158,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
         </div>
       </div>
 
-      {/* Original Raw Thought (Personal Journal Deckled Card) */}
+      {/* Original Raw Thought */}
       <div className="bg-pearl/95 border border-powder/70 rounded-2xl p-5 shadow-xs">
-        <div className="flex items-center gap-2 mb-2 text-cocoa">
-          <PearlSparkle size={16} />
-          <span className="font-editorial italic text-base">Original Captured Spark</span>
+        <div className="mb-2 text-cocoa">
+          <span className="font-sans text-xs text-cocoa-muted uppercase tracking-wider">original thought</span>
         </div>
         <p className="text-sm text-cocoa leading-relaxed whitespace-pre-wrap font-sans">
           {idea.raw_thought}
@@ -171,10 +170,9 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
 
       {/* AI Summary (if present) */}
       {idea.ai_summary && (
-        <div className="bg-blush-100/70 border border-powder rounded-2xl p-5 shadow-xs">
-          <div className="flex items-center gap-2 mb-2 text-cocoa">
-            <PearlSparkle size={16} />
-            <span className="font-editorial italic text-base">AI Synthesis & Perspective</span>
+        <div className="bg-blush-100/40 border border-powder/70 rounded-2xl p-5 shadow-xs">
+          <div className="mb-2 text-cocoa">
+            <span className="font-sans text-xs text-cocoa-muted uppercase tracking-wider">summary</span>
           </div>
           <p className="text-sm text-cocoa-soft leading-relaxed font-sans">
             {idea.ai_summary}
@@ -184,8 +182,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ idea }) => {
 
       {/* Tags Section */}
       <div>
-        <label className="font-editorial italic text-cocoa-muted text-sm block mb-2">
-          Tags & Themes
+        <label className="text-xs text-cocoa-muted font-sans block mb-2">
+          tags
         </label>
         <div className="flex flex-wrap gap-1.5 items-center">
           {idea.tags.map((t) => (

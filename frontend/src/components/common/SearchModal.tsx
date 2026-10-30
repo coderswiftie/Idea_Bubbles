@@ -79,7 +79,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search thoughts, raw sparks, keepsakes, and notes..."
+            placeholder="Search ideas..."
             className="flex-1 bg-transparent text-sm text-cocoa placeholder:text-mauve/70 focus:outline-none font-sans"
           />
           {loading && <Loader2 className="w-4 h-4 animate-spin text-rose" />}
@@ -94,8 +94,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         {/* Results List */}
         <div className="max-h-96 overflow-y-auto p-3 space-y-1">
           {query.trim() && !loading && results.length === 0 && (
-            <div className="text-center py-10 px-4 text-xs font-editorial italic text-mauve">
-              No thoughts matching "{query}"
+            <div className="text-center py-10 px-4 text-xs font-sans text-mauve">
+              No ideas matching "{query}"
             </div>
           )}
 
@@ -118,7 +118,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                     {idea.status.toLowerCase().replace('_', ' ')}
                   </span>
                 </div>
-                <h4 className="font-serif text-base font-bold text-cocoa group-hover:text-rose transition-colors truncate">
+                <h4 className="font-serif text-base font-medium text-cocoa group-hover:text-rose transition-colors truncate">
                   {idea.title}
                 </h4>
                 <p className="text-xs text-mauve truncate mt-0.5 font-sans">
@@ -130,11 +130,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           ))}
 
           {!query.trim() && (
-            <div className="text-center py-8 text-xs font-editorial italic text-mauve">
-              <div className="flex justify-center mb-1.5 opacity-60">
-                <CoquetteBow className="w-7 h-5 text-rose" />
-              </div>
-              Type keywords from titles, thoughts, or reflections to locate ideas instantly.
+            <div className="text-center py-8 text-xs font-sans text-mauve">
+              Type to search ideas...
             </div>
           )}
         </div>

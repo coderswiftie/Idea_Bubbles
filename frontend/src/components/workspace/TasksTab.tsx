@@ -49,18 +49,18 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
       <div>
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h3 className="font-brand text-3xl font-bold text-cocoa">Milestones & Tasks</h3>
-            <p className="font-editorial italic text-cocoa-muted text-sm">
+            <h3 className="font-brand text-4xl font-normal text-cocoa lowercase leading-none">tasks</h3>
+            <p className="text-xs text-cocoa-muted font-sans mt-1">
               {completedTasks} of {totalTasks} completed ({progressPercent}%)
             </p>
           </div>
           {!isAdding && (
             <button
               onClick={() => setIsAdding(true)}
-              className="px-4 py-1.5 rounded-full text-xs font-semibold bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark flex items-center gap-1.5 transition-all shadow-sm"
+              className="px-3 py-1 rounded-full text-xs font-sans text-cocoa-muted hover:text-cocoa border border-powder/70 hover:border-cocoa-muted/50 transition-colors flex items-center gap-1.5"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span className="font-editorial italic text-sm">Add Task</span>
+              <span>new task</span>
             </button>
           )}
         </div>
@@ -77,18 +77,15 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
 
       {/* Convert to Active Project Banner */}
       {idea.status !== 'ACTIVE_PROJECT' && totalTasks >= 2 && (
-        <div className="bg-blush-100 border border-powder rounded-2xl p-3.5 flex items-center justify-between gap-3 shadow-xs">
-          <div className="flex items-center gap-2.5">
-            <Sparkles className="w-4 h-4 text-rose shrink-0" />
-            <p className="text-xs text-cocoa font-sans">
-              Ready to take this further? Convert this thought into an <strong>Active Project</strong>.
-            </p>
-          </div>
+        <div className="bg-blush-50 border border-powder/60 rounded-2xl p-3 flex items-center justify-between gap-3">
+          <p className="text-xs text-cocoa font-sans">
+            Convert this idea into an active project.
+          </p>
           <button
             onClick={handleConvertToProject}
-            className="px-3.5 py-1.5 bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark rounded-xl text-xs font-semibold shrink-0 transition-colors shadow-xs"
+            className="px-3 py-1 text-xs border border-powder/80 rounded-full text-cocoa hover:border-cocoa-muted font-sans transition-colors"
           >
-            Activate
+            activate
           </button>
         </div>
       )}
@@ -100,7 +97,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
             type="text"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            placeholder="What is the next step or milestone?..."
+            placeholder="Next step or task..."
             autoFocus
             className="flex-1 bg-transparent text-xs text-cocoa placeholder-cocoa-faint focus:outline-none px-2 font-sans"
           />
@@ -127,9 +124,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({ idea }) => {
       {/* Task List */}
       {idea.tasks.length === 0 && !isAdding ? (
         <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-powder/80 bg-pearl/60">
-          <PearlSparkle size={24} className="mx-auto mb-2 text-rose" />
-          <p className="text-xs font-medium text-cocoa font-sans">No tasks defined</p>
-          <p className="text-[11px] text-cocoa-muted mt-1 font-editorial italic text-sm">Break your thought into delicate, exciting milestones or checklist items.</p>
+          <p className="text-xs font-sans text-cocoa-muted">No tasks defined</p>
         </div>
       ) : (
         <div className="space-y-2.5">

@@ -36,6 +36,11 @@ export const UniverseCanvas: React.FC = () => {
   const hoveredBubbleIdRef = useRef<string | null>(null);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
+  // Floating outside tooltip refs
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const tooltipTitleRef = useRef<HTMLSpanElement | null>(null);
+  const tooltipCatRef = useRef<HTMLSpanElement | null>(null);
+
   // Simulation state
   const bubblesRef = useRef<PhysicsBubble[]>([]);
   const animFrameIdRef = useRef<number | null>(null);
@@ -383,61 +388,29 @@ export const UniverseCanvas: React.FC = () => {
         ctx.fill();
         ctx.restore();
 
-        // G. Category Pearl (Tiny delicate tinted dot at top-right rim)
-        if (b.idea.category) {
-          ctx.beginPath();
-          ctx.arc(x + r * 0.68, y - r * 0.68, 4, 0, Math.PI * 2);
-          ctx.fillStyle = b.categoryColor;
-          ctx.fill();
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
+        // G. (Bubbles are purely visual objects: no text or labels rendered on the bubble)
+      }
 
-        // H. Legible Editorial Typography Inside Transparent Bubble
-        // (No opaque card / pill backing - completely translucent!)
-        ctx.save();
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        // Luminous diffused pearl-white text shadow ensures readability on any canvas area
-        ctx.shadowColor = 'rgba(255, 252, 248, 0.98)';
-        ctx.shadowBlur = 6;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-
-        // Truncate title cleanly to fit bubble interior
-        let title = b.idea.title || 'Spark';
-        ctx.font = '600 13px "Quicksand", sans-serif';
-        const maxTextWidth = r * 1.5;
-
-        if (ctx.measureText(title).width > maxTextWidth) {
-          while (title.length > 3 && ctx.measureText(title + '...').width > maxTextWidth) {
-            title = title.slice(0, -1);
+      // Update Floating Outside Hover Tooltip
+      if (tooltipRef.current) {
+        const hoveredB = bubbles.find((b) => b.id === hoveredBubbleIdRef.current);
+        if (hoveredB) {
+          tooltipRef.current.style.opacity = '1';
+          tooltipRef.current.style.transform = `translate3d(${hoveredB.x}px, ${hoveredB.y - hoveredB.radius - 12}px, 0) translate(-50%, -100%)`;
+          if (tooltipTitleRef.current) {
+            tooltipTitleRef.current.textContent = hoveredB.idea.title || 'Spark';
           }
-          title += '...';
-        }
-
-        // Render deep cocoa title text
-        ctx.fillStyle = '#49363B';
-
-        // If bubble is larger, render title slightly higher and handwritten cursive category underneath
-        if (r > 62 && b.idea.category?.name) {
-          ctx.fillText(title, x, y - 6);
-
-          ctx.font = 'italic 12px "Cormorant Garamond", "Dancing Script", serif';
-          ctx.fillStyle = '#876D75';
-          ctx.shadowBlur = 4;
-          let sub = b.idea.category.name;
-          if (ctx.measureText(sub).width > maxTextWidth) {
-            sub = sub.slice(0, 16) + '...';
+          if (tooltipCatRef.current) {
+            if (hoveredB.idea.category?.name) {
+              tooltipCatRef.current.textContent = hoveredB.idea.category.name.toLowerCase();
+              tooltipCatRef.current.style.display = 'block';
+            } else {
+              tooltipCatRef.current.style.display = 'none';
+            }
           }
-          ctx.fillText(sub, x, y + 12);
         } else {
-          ctx.fillText(title, x, y);
+          tooltipRef.current.style.opacity = '0';
         }
-
-        ctx.restore();
       }
 
       animFrameIdRef.current = requestAnimationFrame(loop);
@@ -576,6 +549,18 @@ export const UniverseCanvas: React.FC = () => {
         onTouchEnd={handleTouchEnd}
         className="w-full h-full block"
       />
+
+      {/* Floating Outside Hover Tooltip */}
+      <div
+        ref={tooltipRef}
+        className="pointer-events-none absolute z-30 transition-opacity duration-150 top-0 left-0 opacity-0"
+      >
+        <div className="bg-pearl/95 backdrop-blur-md border border-powder/80 shadow-[0_4px_20px_rgba(73,54,59,0.08)] rounded-xl px-3.5 py-1.5 flex flex-col items-center gap-0.5 text-center whitespace-nowrap">
+          <span ref={tooltipTitleRef} className="font-serif text-sm font-semibold text-cocoa tracking-wide" />
+          <span ref={tooltipCatRef} className="font-editorial italic text-xs text-mauve hidden lowercase" />
+        </div>
+        <div className="w-2 h-2 bg-pearl border-b border-r border-powder/80 rotate-45 mx-auto -mt-1" />
+      </div>
     </div>
   );
 };

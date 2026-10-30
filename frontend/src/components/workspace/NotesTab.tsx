@@ -48,18 +48,17 @@ export const NotesTab: React.FC<NotesTabProps> = ({ idea }) => {
   return (
     <div className="space-y-4 animate-in fade-in duration-200">
       {/* Header and Add Button */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pb-1">
         <div>
-          <h3 className="font-brand text-3xl font-bold text-cocoa">Progress Notes</h3>
-          <p className="font-editorial italic text-cocoa-muted text-sm">Preserve developing thoughts and creative insights</p>
+          <h3 className="font-brand text-4xl font-normal text-cocoa lowercase leading-none">notes</h3>
         </div>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark flex items-center gap-1.5 transition-all shadow-sm"
+            className="px-3 py-1 rounded-full text-xs font-sans text-cocoa-muted hover:text-cocoa border border-powder/70 hover:border-cocoa-muted/50 transition-colors flex items-center gap-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span className="font-editorial italic text-sm">Add Note</span>
+            <span>new note</span>
           </button>
         )}
       </div>
@@ -100,9 +99,7 @@ export const NotesTab: React.FC<NotesTabProps> = ({ idea }) => {
       {/* Notes List */}
       {idea.notes.length === 0 && !isAdding ? (
         <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-powder/80 bg-pearl/60">
-          <PearlSparkle size={24} className="mx-auto mb-2 text-rose" />
-          <p className="text-xs font-medium text-cocoa font-sans">No notes yet</p>
-          <p className="text-[11px] text-cocoa-muted mt-1 font-editorial italic text-sm">Capture findings, inspirations, or passages as you explore.</p>
+          <p className="text-xs font-sans text-cocoa-muted">No notes yet</p>
         </div>
       ) : (
         <div className="space-y-3">

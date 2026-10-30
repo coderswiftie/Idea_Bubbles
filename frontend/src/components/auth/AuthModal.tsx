@@ -77,17 +77,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           /* Sign In / Sign Up Form */
           <div>
             <div className="text-center mb-5">
-              <div className="flex justify-center mb-2">
-                <CoquetteBow className="w-8 h-6 text-rose" />
-              </div>
-              <h3 className="font-brand text-3xl font-bold text-cocoa">
-                {isRegister ? 'Join Idea Bubbles' : 'Welcome Back'}
+              <h3 className="font-brand text-4xl font-normal text-cocoa lowercase">
+                {isRegister ? 'join' : 'welcome'}
               </h3>
-              <p className="font-editorial italic text-mauve text-sm mt-0.5">
-                {isRegister
-                  ? 'Create a personal, poetic sanctuary for your thoughts'
-                  : 'Step back into your dreamy world of ideas'}
-              </p>
             </div>
 
             {error && (
@@ -99,8 +91,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="space-y-3 font-sans">
               {isRegister && (
                 <div>
-                  <label className="text-xs text-mauve block mb-1 font-editorial italic">
-                    Display Name
+                  <label className="text-xs text-mauve block mb-1 font-sans">
+                    display name
                   </label>
                   <div className="flex items-center gap-2 bg-blush/20 border border-powder rounded-xl px-3 py-2 text-xs focus-within:border-rose/80 focus-within:ring-2 focus-within:ring-rose/20 transition-all">
                     <UserIcon className="w-4 h-4 text-mauve" />
@@ -108,7 +100,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                       type="text"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
-                      placeholder="e.g. Srishti"
+                      placeholder="name"
                       className="w-full bg-transparent text-cocoa placeholder:text-mauve/60 focus:outline-none"
                     />
                   </div>
@@ -116,8 +108,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               )}
 
               <div>
-                <label className="text-xs text-mauve block mb-1 font-editorial italic">
-                  Email Address
+                <label className="text-xs text-mauve block mb-1 font-sans">
+                  email
                 </label>
                 <div className="flex items-center gap-2 bg-blush/20 border border-powder rounded-xl px-3 py-2 text-xs focus-within:border-rose/80 focus-within:ring-2 focus-within:ring-rose/20 transition-all">
                   <Mail className="w-4 h-4 text-mauve" />
@@ -133,8 +125,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               <div>
-                <label className="text-xs text-mauve block mb-1 font-editorial italic">
-                  Password
+                <label className="text-xs text-mauve block mb-1 font-sans">
+                  password
                 </label>
                 <div className="flex items-center gap-2 bg-blush/20 border border-powder rounded-xl px-3 py-2 text-xs focus-within:border-rose/80 focus-within:ring-2 focus-within:ring-rose/20 transition-all">
                   <Lock className="w-4 h-4 text-mauve" />
@@ -144,7 +136,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     minLength={6}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="At least 6 characters"
+                    placeholder="password"
                     className="w-full bg-transparent text-cocoa placeholder:text-mauve/60 focus:outline-none"
                   />
                 </div>
@@ -153,9 +145,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 mt-2 rounded-xl bg-rose text-white text-xs font-semibold shadow-sm hover:bg-rose-hover transition-all disabled:opacity-50"
+                className="w-full py-2.5 mt-2 rounded-xl bg-cocoa text-pearl text-xs font-sans tracking-wide shadow-sm hover:bg-cocoa-soft transition-all disabled:opacity-50 lowercase"
               >
-                {loading ? 'Opening Sanctuary...' : isRegister ? 'Create Sanctuary' : 'Enter Journal'}
+                {loading ? 'loading...' : isRegister ? 'create account' : 'sign in'}
               </button>
             </form>
 

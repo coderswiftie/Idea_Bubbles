@@ -36,19 +36,13 @@ export const AllIdeasView: React.FC = () => {
   return (
     <div className="w-full min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-6xl mx-auto overflow-y-auto">
       {/* View Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3">
-          <CoquetteBow size={28} />
-          <h2 className="font-brand text-4xl font-bold text-cocoa flex items-center gap-2.5">
-            <span>Journal of Thoughts</span>
-            <span className="font-editorial italic text-cocoa-muted font-normal text-base">
-              ({filteredIdeas.length} {filteredIdeas.length === 1 ? 'thought' : 'thoughts'})
-            </span>
-          </h2>
-        </div>
-        <p className="font-editorial italic text-cocoa-muted text-base mt-1">
-          A living, quiet archive of all captured sparks and projects
-        </p>
+      <div className="mb-6 flex items-baseline justify-between">
+        <h2 className="font-brand text-5xl md:text-6xl font-normal text-cocoa lowercase leading-none">
+          journal
+        </h2>
+        <span className="font-sans text-xs text-cocoa-muted">
+          {filteredIdeas.length} {filteredIdeas.length === 1 ? 'idea' : 'ideas'}
+        </span>
       </div>
 
       {/* Filter and Control Bar */}
@@ -123,9 +117,7 @@ export const AllIdeasView: React.FC = () => {
       {/* Ideas Card / Grid List */}
       {filteredIdeas.length === 0 ? (
         <div className="text-center py-20 bg-pearl/60 border border-dashed border-powder/80 rounded-2xl">
-          <PearlSparkle size={24} className="mx-auto mb-2 text-rose" />
-          <p className="text-sm font-semibold text-cocoa">No matching thoughts found</p>
-          <p className="text-xs text-cocoa-muted mt-1 font-sans">Try adjusting your filters or whisper a new spark below.</p>
+          <p className="text-sm font-medium text-cocoa">No ideas found</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

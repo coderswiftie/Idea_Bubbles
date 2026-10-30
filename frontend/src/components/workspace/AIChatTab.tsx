@@ -85,14 +85,13 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
   return (
     <div className="flex flex-col h-[650px] max-h-[75vh] animate-in fade-in duration-200">
       {/* Top AI Bar & Action Buttons */}
-      <div className="pb-3 border-b border-powder flex flex-wrap items-center justify-between gap-2 shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-rose animate-pulse" />
-          <span className="font-brand text-2xl font-bold text-cocoa">Studio & Musings</span>
-          <span className="text-[10px] text-mauve bg-blush px-2.5 py-0.5 rounded-full border border-powder font-sans">
+      <div className="pb-3 border-b border-powder/60 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div className="flex items-center gap-2.5">
+          <h3 className="font-brand text-4xl font-normal text-cocoa lowercase leading-none">studio</h3>
+          <span className="text-[10px] text-cocoa-muted font-sans border border-powder/60 px-2 py-0.5 rounded-full">
             {aiStatus?.configured
-              ? `${aiStatus.provider.toUpperCase()} (${aiStatus.model})`
-              : 'Local Heuristic Mode'}
+              ? `${aiStatus.provider} (${aiStatus.model})`
+              : 'local'}
           </span>
         </div>
 
@@ -101,18 +100,18 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
           <button
             onClick={handleSummarize}
             disabled={isSummarizing}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-pearl border border-powder hover:border-rose/60 text-cocoa hover:bg-blush flex items-center gap-1.5 transition-all shadow-sm disabled:opacity-50"
+            className="px-3 py-1 rounded-full text-xs font-sans text-cocoa-muted hover:text-cocoa border border-powder/70 hover:border-cocoa-muted/50 transition-colors flex items-center gap-1.5 disabled:opacity-50"
           >
-            {isSummarizing ? <Loader2 className="w-3 h-3 animate-spin text-rose" /> : <Sparkles className="w-3 h-3 text-rose" />}
-            <span className="font-editorial italic text-sm">Summarize</span>
+            {isSummarizing ? <Loader2 className="w-3 h-3 animate-spin text-rose" /> : <Sparkles className="w-3 h-3 text-cocoa-muted" />}
+            <span>summarize</span>
           </button>
           <button
             onClick={handleExpand}
             disabled={isExpanding}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-pearl border border-powder hover:border-rose/60 text-cocoa hover:bg-blush flex items-center gap-1.5 transition-all shadow-sm disabled:opacity-50"
+            className="px-3 py-1 rounded-full text-xs font-sans text-cocoa-muted hover:text-cocoa border border-powder/70 hover:border-cocoa-muted/50 transition-colors flex items-center gap-1.5 disabled:opacity-50"
           >
-            {isExpanding ? <Loader2 className="w-3 h-3 animate-spin text-rose" /> : <Compass className="w-3 h-3 text-rose" />}
-            <span className="font-editorial italic text-sm">Expand Idea</span>
+            {isExpanding ? <Loader2 className="w-3 h-3 animate-spin text-rose" /> : <Compass className="w-3 h-3 text-cocoa-muted" />}
+            <span>expand</span>
           </button>
         </div>
       </div>
@@ -121,26 +120,26 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
       <div className="flex-1 overflow-y-auto py-3 space-y-4 pr-1">
         {/* Summarize Result Banner (if triggered) */}
         {summaryData && (
-          <div className="bg-blush/40 border border-powder rounded-2xl p-4.5 space-y-2 text-xs shadow-sm">
-            <div className="flex items-center gap-1.5 text-cocoa font-editorial italic text-sm">
+          <div className="bg-blush/30 border border-powder/70 rounded-2xl p-4 space-y-2 text-xs">
+            <div className="flex items-center gap-1.5 text-cocoa font-sans font-medium text-xs">
               <Sparkles className="w-3.5 h-3.5 text-rose" />
-              <span>Thought Synthesis</span>
+              <span>Summary</span>
             </div>
-            <p className="font-serif text-sm font-bold text-cocoa">{summaryData.one_sentence_summary}</p>
+            <p className="font-serif text-sm font-semibold text-cocoa">{summaryData.one_sentence_summary}</p>
             <p className="text-cocoa/90 leading-relaxed font-sans">{summaryData.detailed_explanation}</p>
-            <div className="pt-2 border-t border-powder/80">
-              <span className="text-xs text-mauve font-editorial italic block mb-1">Key Themes:</span>
+            <div className="pt-2 border-t border-powder/70">
+              <span className="text-xs text-cocoa-muted font-sans block mb-1">Key Themes:</span>
               <div className="flex flex-wrap gap-1.5">
                 {summaryData.key_themes.map((th, i) => (
-                  <span key={i} className="px-2.5 py-0.5 rounded-full bg-pearl border border-powder text-xs text-cocoa font-medium shadow-sm">
+                  <span key={i} className="px-2.5 py-0.5 rounded-full bg-pearl border border-powder/70 text-xs text-cocoa font-sans">
                     {th}
                   </span>
                 ))}
               </div>
             </div>
             {summaryData.unresolved_questions?.length > 0 && (
-              <div className="pt-2 border-t border-powder/80">
-                <span className="text-xs text-mauve font-editorial italic block mb-1">Questions to Ponder:</span>
+              <div className="pt-2 border-t border-powder/70">
+                <span className="text-xs text-cocoa-muted font-sans block mb-1">Questions:</span>
                 <ul className="list-disc list-inside space-y-0.5 text-cocoa/80 font-sans">
                   {summaryData.unresolved_questions.map((q, i) => (
                     <li key={i}>{q}</li>
@@ -153,30 +152,30 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
 
         {/* Expansion Result Banner (if triggered) */}
         {expansionData && (
-          <div className="bg-pearl border border-powder rounded-2xl p-4.5 space-y-2.5 text-xs shadow-sm">
-            <div className="flex items-center gap-1.5 text-cocoa font-editorial italic text-sm">
+          <div className="bg-pearl border border-powder/70 rounded-2xl p-4 space-y-2.5 text-xs">
+            <div className="flex items-center gap-1.5 text-cocoa font-sans font-medium text-xs">
               <Compass className="w-3.5 h-3.5 text-rose" />
-              <span>Creative Horizons</span>
+              <span>Expansion</span>
             </div>
             <div>
-              <span className="text-xs text-mauve font-editorial italic block mb-1">Potential Paths:</span>
+              <span className="text-xs text-cocoa-muted font-sans block mb-1">Potential Directions:</span>
               <ul className="list-disc list-inside space-y-0.5 text-cocoa/80 font-sans">
                 {expansionData.possible_directions.map((d, i) => (
                   <li key={i}>{d}</li>
                 ))}
               </ul>
             </div>
-            <div className="pt-2 border-t border-powder/80">
-              <span className="text-xs text-mauve font-editorial italic block mb-1">First Experiments:</span>
+            <div className="pt-2 border-t border-powder/70">
+              <span className="text-xs text-cocoa-muted font-sans block mb-1">First Experiments:</span>
               <ul className="list-disc list-inside space-y-0.5 text-cocoa/80 font-sans">
                 {expansionData.first_experiments.map((e, i) => (
                   <li key={i}>{e}</li>
                 ))}
               </ul>
             </div>
-            <div className="pt-2 border-t border-powder/80 bg-blush/30 p-3 rounded-xl shadow-sm border border-powder/80">
-              <span className="text-xs text-rose font-editorial italic block mb-0.5 font-bold">Gentle Next Step (48h):</span>
-              <p className="text-cocoa font-medium font-sans">{expansionData.realistic_next_step}</p>
+            <div className="pt-2 border-t border-powder/70 bg-blush/20 p-2.5 rounded-xl border border-powder/60">
+              <span className="text-xs text-cocoa font-sans block mb-0.5 font-medium">Next Step:</span>
+              <p className="text-cocoa font-sans">{expansionData.realistic_next_step}</p>
             </div>
           </div>
         )}
@@ -184,13 +183,7 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
         {/* Welcome Message if chat is empty */}
         {messages.length === 0 && !summaryData && !expansionData && (
           <div className="text-center py-12 px-4">
-            <div className="flex justify-center mb-2">
-              <CoquetteBow className="w-9 h-7 text-rose" />
-            </div>
-            <h4 className="font-serif text-base font-bold text-cocoa">Converse with your thought</h4>
-            <p className="font-editorial italic text-mauve text-sm max-w-xs mx-auto mt-1">
-              Ask questions, explore poetic directions, or unravel nuances together.
-            </p>
+            <p className="text-xs font-sans text-cocoa-muted">Explore thoughts or ask questions about this idea</p>
           </div>
         )}
 
@@ -229,9 +222,9 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
         })}
 
         {isSending && (
-          <div className="flex items-center gap-2 text-xs text-mauve pl-8 font-sans">
+          <div className="flex items-center gap-2 text-xs text-cocoa-muted pl-8 font-sans">
             <Loader2 className="w-3.5 h-3.5 animate-spin text-rose" />
-            <span className="font-editorial italic">Weaving insights...</span>
+            <span>Thinking...</span>
           </div>
         )}
 
@@ -239,19 +232,19 @@ export const AIChatTab: React.FC<AIChatTabProps> = ({ idea }) => {
       </div>
 
       {/* Chat Input Bar */}
-      <form onSubmit={handleSendMessage} className="pt-3 border-t border-powder shrink-0">
-        <div className="flex items-center gap-2 bg-pearl border border-powder rounded-2xl p-1.5 shadow-sm focus-within:border-rose/80 focus-within:ring-2 focus-within:ring-rose/20 transition-all">
+      <form onSubmit={handleSendMessage} className="pt-3 border-t border-powder/60 shrink-0">
+        <div className="flex items-center gap-2 bg-pearl border border-powder/70 rounded-2xl p-1.5 focus-within:border-cocoa-muted/40 transition-colors">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Ask anything about "${idea.title}", darling...`}
-            className="flex-1 bg-transparent text-xs text-cocoa placeholder:text-mauve/70 focus:outline-none px-3 py-1 font-sans"
+            placeholder="Ask a question about this idea..."
+            className="flex-1 bg-transparent text-xs text-cocoa placeholder:text-cocoa-faint focus:outline-none px-3 py-1 font-sans"
           />
           <button
             type="submit"
             disabled={!input.trim() || isSending}
-            className="p-2 rounded-xl bg-rose text-white hover:bg-rose-hover disabled:opacity-40 transition-all cursor-pointer shadow-sm"
+            className="p-2 rounded-xl bg-cocoa text-pearl hover:bg-cocoa-dark disabled:opacity-40 transition-all cursor-pointer"
           >
             <Send className="w-3.5 h-3.5" />
           </button>

@@ -40,7 +40,7 @@ export const AttachmentsTab: React.FC<AttachmentsTabProps> = ({ idea }) => {
   };
 
   const handleDelete = async (attId: string) => {
-    if (confirm('Delete this keepsake?')) {
+    if (confirm('Delete this attachment?')) {
       await api.deleteAttachment(idea.id, attId);
       refreshSelectedIdea();
     }
@@ -49,21 +49,17 @@ export const AttachmentsTab: React.FC<AttachmentsTabProps> = ({ idea }) => {
   return (
     <div className="space-y-4 animate-in fade-in duration-200">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pb-1">
         <div>
-          <div className="flex items-center gap-1.5">
-            <h3 className="font-brand text-3xl font-bold text-cocoa">Files & Keepsakes</h3>
-            <PearlSparkle className="w-3.5 h-3.5 text-rose" />
-          </div>
-          <p className="font-editorial italic text-mauve text-sm">Sketches, clippings, PDFs, and visual mementos</p>
+          <h3 className="font-brand text-4xl font-normal text-cocoa lowercase leading-none">attachments</h3>
         </div>
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
-          className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-pearl border border-powder hover:border-rose/60 text-cocoa hover:bg-blush flex items-center gap-1.5 transition-all shadow-sm disabled:opacity-50"
+          className="px-3 py-1 rounded-full text-xs font-sans text-cocoa-muted hover:text-cocoa border border-powder/70 hover:border-cocoa-muted/50 transition-colors flex items-center gap-1.5 disabled:opacity-50"
         >
-          {isUploading ? <Loader2 className="w-3.5 h-3.5 animate-spin text-rose" /> : <Upload className="w-3.5 h-3.5 text-rose" />}
-          <span className="font-editorial italic text-sm">Add Keepsake</span>
+          {isUploading ? <Loader2 className="w-3.5 h-3.5 animate-spin text-rose" /> : <Upload className="w-3.5 h-3.5 text-cocoa-muted" />}
+          <span>upload</span>
         </button>
       </div>
 
@@ -81,11 +77,10 @@ export const AttachmentsTab: React.FC<AttachmentsTabProps> = ({ idea }) => {
       {idea.attachments.length === 0 ? (
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="text-center py-12 px-4 rounded-2xl border border-dashed border-powder/80 bg-pearl/60 cursor-pointer hover:border-rose/60 transition-colors"
+          className="text-center py-12 px-4 rounded-2xl border border-dashed border-powder/80 bg-pearl/60 cursor-pointer hover:border-cocoa-muted/40 transition-colors"
         >
-          <ImageIcon className="w-8 h-8 text-powder mx-auto mb-2" />
-          <p className="text-xs font-medium text-cocoa">Drop files or click to preserve a memento</p>
-          <p className="text-[11px] text-mauve mt-1">PNG, JPG, WebP, PDF, Markdown up to 15MB</p>
+          <p className="text-xs font-sans text-cocoa-muted">No attachments yet</p>
+          <p className="text-[11px] text-cocoa-faint font-sans mt-1">Click to upload files</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

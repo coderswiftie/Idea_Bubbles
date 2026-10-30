@@ -79,105 +79,37 @@ export const IdeaWorkspace: React.FC = () => {
       </div>
 
       {/* Tabs Navigation */}
-      <div className="px-5 border-b border-powder/60 flex items-center gap-1 overflow-x-auto py-2 shrink-0 bg-ivory-50/70">
-        <button
-          onClick={() => setActiveTab('overview')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'overview'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5 text-rose" />
-          <span>Overview</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('notes')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'notes'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <FileText className="w-3.5 h-3.5 text-mauve" />
-          <span>Notes</span>
-          {selectedIdeaDetail && selectedIdeaDetail.notes.length > 0 && (
-            <span className="text-[10px] bg-blush-200 px-1.5 py-0.2 rounded-full text-cocoa font-sans font-semibold">
-              {selectedIdeaDetail.notes.length}
-            </span>
-          )}
-        </button>
-
-        <button
-          onClick={() => setActiveTab('tasks')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'tasks'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <CheckSquare className="w-3.5 h-3.5 text-rose-dark" />
-          <span>Tasks</span>
-          {selectedIdeaDetail && selectedIdeaDetail.tasks.length > 0 && (
-            <span className="text-[10px] bg-blush-200 px-1.5 py-0.2 rounded-full text-cocoa font-sans font-semibold">
-              {selectedIdeaDetail.tasks.filter((t) => t.is_completed).length}/{selectedIdeaDetail.tasks.length}
-            </span>
-          )}
-        </button>
-
-        <button
-          onClick={() => setActiveTab('references')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'references'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <Link2 className="w-3.5 h-3.5 text-champagne-dark" />
-          <span>References</span>
-          {selectedIdeaDetail && selectedIdeaDetail.references.length > 0 && (
-            <span className="text-[10px] bg-blush-200 px-1.5 py-0.2 rounded-full text-cocoa font-sans font-semibold">
-              {selectedIdeaDetail.references.length}
-            </span>
-          )}
-        </button>
-
-        <button
-          onClick={() => setActiveTab('connections')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'connections'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <GitFork className="w-3.5 h-3.5 text-mauve" />
-          <span>Connections</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('attachments')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'attachments'
-              ? 'bg-pearl text-cocoa border border-powder shadow-sm font-semibold'
-              : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/60'
-          }`}
-        >
-          <Paperclip className="w-3.5 h-3.5 text-cocoa-muted" />
-          <span>Files</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('ai')}
-          className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 shrink-0 ${
-            activeTab === 'ai'
-              ? 'bg-gradient-to-r from-blush via-powder to-champagne-light text-cocoa border border-powder shadow-sm'
-              : 'text-rose-dark hover:bg-blush-100'
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5 text-rose-dark" />
-          <span>AI Studio</span>
-        </button>
+      <div className="px-6 border-b border-powder/50 flex items-center gap-5 overflow-x-auto py-2 shrink-0 bg-pearl/60">
+        {[
+          { key: 'overview', label: 'overview' },
+          { key: 'notes', label: 'notes', count: selectedIdeaDetail?.notes.length },
+          { key: 'tasks', label: 'tasks', count: selectedIdeaDetail?.tasks.length },
+          { key: 'references', label: 'references', count: selectedIdeaDetail?.references.length },
+          { key: 'connections', label: 'connections' },
+          { key: 'attachments', label: 'attachments', count: selectedIdeaDetail?.attachments.length },
+          { key: 'ai', label: 'studio' },
+        ].map((tab) => {
+          const isActive = activeTab === tab.key;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key as TabKey)}
+              className={`relative py-1.5 text-xs font-sans tracking-wide transition-colors shrink-0 flex items-center gap-1.5 lowercase ${
+                isActive
+                  ? 'text-cocoa font-medium'
+                  : 'text-cocoa-muted/70 hover:text-cocoa'
+              }`}
+            >
+              <span>{tab.label}</span>
+              {typeof tab.count === 'number' && tab.count > 0 && (
+                <span className="text-[10px] text-mauve">({tab.count})</span>
+              )}
+              {isActive && (
+                <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-rose/80 rounded-full animate-in fade-in duration-200" />
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tab Body Content */}

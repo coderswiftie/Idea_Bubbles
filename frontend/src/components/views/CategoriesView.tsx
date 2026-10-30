@@ -66,26 +66,18 @@ export const CategoriesView: React.FC = () => {
   return (
     <div className="w-full min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-4xl mx-auto overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <div className="flex items-center gap-3">
-            <CoquetteBow size={28} />
-            <h2 className="font-brand text-4xl font-bold text-cocoa">
-              Thought Collections
-            </h2>
-          </div>
-          <p className="font-editorial italic text-cocoa-muted text-base mt-1">
-            Organize and color-tint the delicate clusters in your thought universe
-          </p>
-        </div>
+      <div className="flex items-baseline justify-between mb-6">
+        <h2 className="font-brand text-5xl md:text-6xl font-normal text-cocoa lowercase leading-none">
+          collections
+        </h2>
 
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-4 py-2 rounded-full text-xs font-semibold bg-blush-200 hover:bg-blush-300 border border-powder-dark text-cocoa flex items-center gap-1.5 transition-all shadow-sm"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-sans bg-pearl border border-powder/70 text-cocoa hover:border-rose/60 flex items-center gap-1.5 transition-colors shadow-sm lowercase"
           >
-            <Plus className="w-3.5 h-3.5" />
-            <span className="font-editorial italic text-sm">New Collection</span>
+            <Plus className="w-3.5 h-3.5 stroke-[1.5]" />
+            <span>new collection</span>
           </button>
         )}
       </div>
@@ -93,15 +85,15 @@ export const CategoriesView: React.FC = () => {
       {/* Add Category Form */}
       {isAdding && (
         <form onSubmit={handleCreate} className="bg-pearl/95 border border-powder/70 p-5 rounded-2xl mb-6 space-y-3 shadow-sm">
-          <h3 className="font-brand text-2xl font-bold text-cocoa">
-            Create Custom Collection
+          <h3 className="font-brand text-3xl font-normal text-cocoa lowercase">
+            new collection
           </h3>
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <input
               type="text"
               value={newCatName}
               onChange={(e) => setNewCatName(e.target.value)}
-              placeholder="Collection name (e.g. Poetry, Romantic Philosophy, Art Projects)..."
+              placeholder="Collection name..."
               autoFocus
               className="w-full bg-ivory/80 border border-powder/70 rounded-xl px-3.5 py-2 text-xs text-cocoa placeholder-cocoa-faint focus:outline-none focus:border-rose font-sans"
             />

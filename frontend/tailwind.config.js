@@ -78,13 +78,13 @@ export default {
         }
       },
       fontFamily: {
-        brand: ['"Borel"', '"Dancing Script"', 'cursive'],
-        script: ['"Dancing Script"', '"Borel"', 'cursive'],
-        handwriting: ['"Dancing Script"', '"Borel"', 'cursive'],
-        cursive: ['"Dancing Script"', '"Borel"', 'cursive'],
-        editorial: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
-        display: ['"Instrument Serif"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        serif: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
+        brand: ['"Pinyon Script"', '"Italianno"', '"Alex Brush"', '"Snell Roundhand"', 'cursive'],
+        script: ['"Pinyon Script"', '"Italianno"', '"Alex Brush"', '"Snell Roundhand"', 'cursive'],
+        handwriting: ['"Pinyon Script"', '"Italianno"', '"Alex Brush"', '"Snell Roundhand"', 'cursive'],
+        cursive: ['"Pinyon Script"', '"Italianno"', '"Alex Brush"', '"Snell Roundhand"', 'cursive'],
+        editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        display: ['"Pinyon Script"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['"Quicksand"', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {

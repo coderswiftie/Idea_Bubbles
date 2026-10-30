@@ -566,3 +566,52 @@ Loaded directly from Google Fonts:
 - Action buttons: *"Preserve Thought"*, *"Add Keepsake"*, *"Thought Synthesis"*, *"Creative Horizons"*.
 - Auth & modal prompts: *"Create a personal, poetic sanctuary for your thoughts"*.
 
+---
+
+## 16. Whimsical Romantic Editorial Overhaul: Spencerian Script Typography, Minimalist Navigation, Pure Glass Bubbles & Microcopy De-cluttering
+
+### Art Direction Philosophy
+To break completely away from AI-generated template aesthetics, the interface was elevated into a beautifully art-directed, minimal, romantic digital editorial experience. The design communicates through visual lightness, elegant proportions, and authentic craftsmanship rather than decorative text clutter or generic SaaS dashboard widgets.
+
+### 1. Typography Overhaul — Spencerian & English Copperplate Cursive
+- **Visual Reference Grounding**: Modeled precisely after the user's uploaded reference image of the slanted, high-contrast copperplate script for the word *"journal"*.
+- **Font Stack Loaded**: Added Google Fonts for **`Pinyon Script`**, **`Italianno`**, **`Alex Brush`**, and **`Parisienne`**, mapped to `font-brand`, `font-cursive`, and `font-script`.
+- **Cursive Identity**:
+  - The brand signature is rendered in flowing Spencerian cursive (`font-brand text-4xl font-normal`).
+  - View headers use lowercase cursive typography: `journal`, `collections`, `connections`, `rediscover`.
+  - Workspace tabs and section headers utilize delicate, flowing lowercase script: `overview`, `notes`, `tasks`, `references`, `connections`, `attachments`, `studio`.
+  - All script elements are styled with `font-normal` (non-bold) to preserve delicate hairline upstrokes and avoid heavy, robotic, corporate-looking letters.
+
+### 2. Complete Navbar Redesign
+- **Elimination of Clunky Dashboard Containers**: The large pill-shaped container, bulky active buttons, and repetitive icons beside every navigation item were completely eliminated.
+- **Minimal Editorial Header**:
+  - Brand signature on the left: *"Idea Bubbles"* in graceful cursive script.
+  - Centered delicate text links: `universe`, `journal`, `collections`, `connections`, `rediscover` in understated lowercase with subtle hairline active underlines.
+  - Right-aligned controls: Understated `search`, `pause/play` physics toggle, and `account` button with clean, minimalist styling.
+
+### 3. Pure Soap Bubbles — Text-Free Canvas
+- **Obstruction-Free Glass Bubbles**: Removed all text, category dots, and labels from inside the bubbles on the HTML5 canvas. Every bubble is a pristine, transparent, circular sphere with thin-film rainbow iridescence, curved crescent specular highlights, and soft ground reflection sheens.
+- **External Floating Tooltips**: When hovering over a bubble, a minimalist, elegant tooltip dynamically renders outside the bubble (`translate3d(x, y - radius - 12px, 0)`), displaying the idea title and category tag with zero obstruction of the bubble itself.
+- **Direct Workspace Access**: Clicking a bubble smoothly opens its idea workspace.
+
+### 4. Eradication of Poetic Filler Text & Artificial Slogans
+- **Cleaned Microcopy**: Completely removed all automatically generated poetic filler sentences and taglines, including:
+  - *"thoughts drift like delicate soap bubbles in the morning light"* (removed from canvas watermark).
+  - *"A little thought worth keeping, darling..."* (removed from capture placeholders).
+  - *"a gentle archive of fleeting sparks"*, *"Weaving insights..."*, *"Preciousness"*, *"Original Captured Spark"*.
+- **Direct, Human-Made Labels**: Replaced with clean, respectful editorial labels (`title`, `status`, `collection`, `priority`, `original thought`, `summary`, `tags`).
+- **Clean Input Placeholders**: Simplified inputs to clean, functional prompts (`"Capture an idea..."`, `"Search ideas..."`, `"Next step or task..."`).
+
+### 5. Capture Interface Redesign
+- Replaced oversized SaaS bar with an understated floating capture bar:
+  - Translucent pearl-white container with delicate border (`bg-pearl/95 border border-powder/70 rounded-2xl`).
+  - Paperclip attachment button supporting direct file uploads with a removable selected file badge.
+  - Microphone voice dictation button.
+  - Clean input placeholder `"Capture an idea..."`.
+  - Minimal `"save"` CTA button.
+
+### 6. Verification & Quality Assurance
+- **Frontend Build**: Verified production build using `npm run build` (`tsc && vite build`), compiling cleanly in 1.13s with zero errors.
+- **Backend Test Suite**: Ran pytest across all 14 tests (`test_ai_fallback.py`, `test_auth.py`, `test_connections.py`, `test_ideas.py`, `test_security.py`, `test_workspace.py`) — 100% passing.
+- **Data Integrity**: Preserved SQLite schema, FastAPI endpoints, AI provider integrations, and local mock heuristic fallback.
+

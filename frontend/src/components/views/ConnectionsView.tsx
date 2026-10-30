@@ -39,26 +39,18 @@ export const ConnectionsView: React.FC = () => {
   return (
     <div className="w-full min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-4xl mx-auto overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <div className="flex items-center gap-3">
-            <CoquetteBow size={28} />
-            <h2 className="font-brand text-4xl font-bold text-cocoa">
-              Thought Constellations & Bridges
-            </h2>
-          </div>
-          <p className="font-editorial italic text-cocoa-muted text-base mt-1">
-            Interconnected thoughts, thematic bridges, and collaborative synergies
-          </p>
-        </div>
+      <div className="flex items-baseline justify-between mb-6">
+        <h2 className="font-brand text-5xl md:text-6xl font-normal text-cocoa lowercase leading-none">
+          connections
+        </h2>
 
         {!isConnecting && ideas.length >= 2 && (
           <button
             onClick={() => setIsConnecting(true)}
-            className="px-4 py-2 rounded-full text-xs font-semibold bg-blush-200 text-cocoa border border-powder-dark hover:bg-blush-300 flex items-center gap-1.5 transition-all shadow-sm"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-sans bg-pearl border border-powder/70 text-cocoa hover:border-rose/60 flex items-center gap-1.5 transition-colors shadow-sm lowercase"
           >
-            <Plus className="w-3.5 h-3.5" />
-            <span className="font-editorial italic text-sm">Connect Two Thoughts</span>
+            <Plus className="w-3.5 h-3.5 stroke-[1.5]" />
+            <span>new connection</span>
           </button>
         )}
       </div>
@@ -66,13 +58,13 @@ export const ConnectionsView: React.FC = () => {
       {/* Connect Ideas Modal / Form */}
       {isConnecting && (
         <form onSubmit={handleCreate} className="bg-pearl/95 border border-powder/70 p-6 rounded-2xl mb-6 space-y-4 shadow-sm">
-          <h3 className="font-brand text-2xl font-bold text-cocoa">
-            Connect Two Thoughts
+          <h3 className="font-brand text-3xl font-normal text-cocoa lowercase">
+            new connection
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-                First Idea
+              <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+                first idea
               </label>
               <select
                 value={sourceId}
@@ -80,7 +72,7 @@ export const ConnectionsView: React.FC = () => {
                 required
                 className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa focus:outline-none focus:border-rose font-sans cursor-pointer"
               >
-                <option value="">-- Choose first thought --</option>
+                <option value="">-- Choose first idea --</option>
                 {ideas.map((i) => (
                   <option key={i.id} value={i.id}>
                     {i.title}
@@ -89,8 +81,8 @@ export const ConnectionsView: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-                Second Idea
+              <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+                second idea
               </label>
               <select
                 value={targetId}
@@ -98,7 +90,7 @@ export const ConnectionsView: React.FC = () => {
                 required
                 className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa focus:outline-none focus:border-rose font-sans cursor-pointer"
               >
-                <option value="">-- Choose second thought --</option>
+                <option value="">-- Choose second idea --</option>
                 {ideas.filter((i) => i.id !== sourceId).map((i) => (
                   <option key={i.id} value={i.id}>
                     {i.title}
@@ -110,8 +102,8 @@ export const ConnectionsView: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-                Relationship
+              <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+                relationship
               </label>
               <select
                 value={relType}
@@ -126,14 +118,14 @@ export const ConnectionsView: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
-                Connection note
+              <label className="text-xs text-cocoa-muted block mb-1 font-sans">
+                note
               </label>
               <input
                 type="text"
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
-                placeholder="Optional description of connection..."
+                placeholder="Optional note..."
                 className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa placeholder-cocoa-faint focus:outline-none focus:border-rose font-sans"
               />
             </div>
@@ -152,7 +144,7 @@ export const ConnectionsView: React.FC = () => {
               disabled={!sourceId || !targetId}
               className="px-4 py-1.5 bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark font-semibold rounded-xl text-xs hover:opacity-95 disabled:opacity-50 shadow-sm"
             >
-              Establish Link
+              Save Connection
             </button>
           </div>
         </form>
@@ -161,11 +153,7 @@ export const ConnectionsView: React.FC = () => {
       {/* Connections List */}
       {connections.length === 0 ? (
         <div className="text-center py-20 bg-pearl/60 border border-dashed border-powder/80 rounded-2xl">
-          <PearlSparkle size={26} className="mx-auto mb-2 text-rose" />
-          <p className="font-serif text-lg font-bold text-cocoa">No connections formed yet</p>
-          <p className="font-editorial italic text-cocoa-muted mt-1 max-w-sm mx-auto text-sm">
-            Connect thoughts together to see relationships charted as cosmic pathways on the universe canvas.
-          </p>
+          <p className="text-xs font-sans text-cocoa-muted">No connections formed yet</p>
         </div>
       ) : (
         <div className="space-y-3">

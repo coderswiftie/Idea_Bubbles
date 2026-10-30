@@ -29,42 +29,30 @@ export const RediscoverView: React.FC = () => {
   return (
     <div className="w-full min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-4xl mx-auto overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <div className="flex items-center gap-3">
-            <CoquetteBow size={28} />
-            <h2 className="font-brand text-4xl font-bold text-cocoa">
-              Rediscover Dormant Thoughts
-            </h2>
-          </div>
-          <p className="font-editorial italic text-cocoa-muted text-base mt-1">
-            A quiet sanctuary resurfacing forgotten sparks when inspiration returns
-          </p>
-        </div>
+      <div className="flex items-baseline justify-between mb-6">
+        <h2 className="font-brand text-5xl md:text-6xl font-normal text-cocoa lowercase leading-none">
+          rediscover
+        </h2>
 
         <button
           onClick={fetchRediscovery}
           disabled={loading}
-          className="p-2.5 rounded-full bg-pearl/90 border border-powder/70 text-cocoa-muted hover:text-cocoa shadow-sm transition-colors"
-          title="Refresh recommendations"
+          className="p-2 rounded-xl bg-pearl border border-powder/70 text-cocoa-muted hover:text-cocoa shadow-sm transition-colors"
+          title="Refresh"
         >
-          <RotateCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+          <RotateCcw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
         </button>
       </div>
 
       {/* Content */}
       {loading ? (
-        <div className="flex items-center justify-center py-24 text-cocoa-muted gap-2 font-sans">
-          <Loader2 className="w-5 h-5 animate-spin text-rose" />
-          <span className="text-xs font-editorial italic text-base">Observing dormant thought constellations...</span>
+        <div className="flex items-center justify-center py-24 text-cocoa-muted gap-2 font-sans text-xs">
+          <Loader2 className="w-4 h-4 animate-spin text-rose" />
+          <span>loading ideas...</span>
         </div>
       ) : items.length === 0 ? (
         <div className="text-center py-20 bg-pearl/60 border border-dashed border-powder/80 rounded-2xl">
-          <PearlSparkle size={26} className="mx-auto mb-2 text-rose" />
-          <p className="font-serif text-lg font-bold text-cocoa">All thoughts are fresh and active</p>
-          <p className="font-editorial italic text-cocoa-muted mt-1 max-w-sm mx-auto text-sm">
-            As your universe expands and thoughts rest over time, this portal will gently surface forgotten sparks for you.
-          </p>
+          <p className="font-serif text-base font-medium text-cocoa">All thoughts are active</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -113,10 +101,10 @@ export const RediscoverView: React.FC = () => {
                   </span>
                   <button
                     onClick={() => selectIdea(item.idea.id)}
-                    className="px-4 py-1.5 rounded-full bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark font-semibold flex items-center gap-1.5 transition-colors shrink-0 shadow-sm text-xs"
+                    className="px-3 py-1 rounded-xl bg-pearl hover:bg-blush text-cocoa border border-powder/70 font-sans flex items-center gap-1.5 transition-colors shrink-0 shadow-sm text-xs lowercase"
                   >
-                    <span>Nurture Spark</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cocoa-muted" />
+                    <span>open</span>
+                    <ArrowRight className="w-3 h-3 text-cocoa-muted" />
                   </button>
                 </div>
               </div>
