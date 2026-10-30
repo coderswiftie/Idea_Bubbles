@@ -519,3 +519,50 @@ All rigid geometric and all-caps dashboard typography has been replaced:
    - **Quicksand** & **Plus Jakarta Sans**: Rounded, organic sans-serif for inputs, descriptions, and workspace reading.
 4. **Sentence Case Exclusivity**:
    - Eradicated all `uppercase tracking-wider text-[10px]` classes across all 7 workspace tabs, modals, and views.
+
+---
+
+## 15. Art-Direction Overhaul: Coquette Editorial × Vintage Romance × Creative Journal
+
+### Philosophy & Vision
+Moving beyond generic AI web tools, Idea Bubbles received a comprehensive art-direction overhaul inspired by:
+**COQUETTE EDITORIAL × VINTAGE ROMANCE × DREAMY SOAP BUBBLES × CREATIVE JOURNAL**.
+
+The aesthetic blends romantic 2000s nostalgic styling, vintage magazine bookcraft, baby pinks, delicate ribbons, pearlized paper, and physically authentic soap bubble optics.
+
+### 1. Palette Architecture
+- **Pearl White (`#FFFCF8`)**: Primary canvas and card surface; warm, luminous, anti-glare.
+- **Warm Ivory (`#F5EFE5`)**: Secondary panel backgrounds and deckled-edge paper textures.
+- **Soft Blush (`#F8E5E9`, `#FDEEF1`)**: Pill backgrounds, delicate highlights, and gentle state badges.
+- **Powder Pink (`#EFCBD5`)**: Subtle borders, dividers, and card frames replacing cold tech borders.
+- **Muted Rose (`#C98FA4`, hover `#B57B90`)**: Primary CTA buttons, active tabs, and delicate accents.
+- **Deep Cocoa (`#49363B`)**: All primary typography; soft vintage bookmaker ink replacing harsh black.
+- **Muted Mauve (`#9D7B8A`)**: Secondary captions, timestamps, and subtle editorial notes.
+- **Champagne Gold (`#E9D8B9`)**: Warm iridescent rim reflections and gentle milestone stars.
+
+### 2. Typography System
+Loaded directly from Google Fonts:
+- **`font-brand` (Borel)**: Cursive brand signature used for the main logo, view headlines, and tabs.
+- **`font-editorial` / `font-serif` (Cormorant Garamond, Instrument Serif, Playfair Display)**: Classic literary serif styling for thought titles, section headers, and poetic subtitles.
+- **`font-sans` (Quicksand)**: Humanist, warm, rounded sans-serif for inputs, notes, tasks, and body descriptions.
+
+### 3. Coquette Bow & Pearl Accent Motifs
+- Custom handcrafted SVG components in [`CoquetteBow.tsx`](file:///Users/srishti/Projects/idea_bubbles/frontend/src/components/common/CoquetteBow.tsx):
+  - `CoquetteBow`: Symmetrical looping ribbon bow with trailing tails and pearl knot highlight.
+  - `PearlSparkle`: Four-pointed soft celestial star with central pearl shine.
+  - `OrnamentalDivider`: Vintage book ornament with centered bow.
+- Integrated into the navigation bar, quick capture bar, empty states, search modals, and view headers.
+
+### 4. Soap Bubble Physics & Optics
+- High-fidelity circular bubbles (`aspect-ratio: 1/1`) on HTML5 canvas with:
+  - 97%+ transparent interior showing universe background.
+  - Rotating thin-film rainbow interference fringe (rose, champagne, cyan, lilac).
+  - Upper-left curved crescent specular reflection and daylight glint.
+  - Deep cocoa lettering with radiant pearl glow for readability.
+  - Continuous buoyant harmonic drift, 2-body elastic momentum transfer, and boundary cushions.
+
+### 5. Whimsical Micro-copy
+- Quick capture prompt: *"A little thought worth keeping, darling..."*
+- Action buttons: *"Preserve Thought"*, *"Add Keepsake"*, *"Thought Synthesis"*, *"Creative Horizons"*.
+- Auth & modal prompts: *"Create a personal, poetic sanctuary for your thoughts"*.
+

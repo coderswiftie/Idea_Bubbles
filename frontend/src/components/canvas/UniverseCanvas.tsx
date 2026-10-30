@@ -134,7 +134,7 @@ export const UniverseCanvas: React.FC = () => {
           const midX = (b1.x + b2.x) / 2 + (b2.y - b1.y) * 0.12;
           const midY = (b1.y + b2.y) / 2 + (b1.x - b2.x) * 0.12;
           ctx.quadraticCurveTo(midX, midY, b2.x, b2.y);
-          ctx.strokeStyle = 'rgba(216, 197, 244, 0.45)';
+          ctx.strokeStyle = 'rgba(201, 143, 164, 0.45)';
           ctx.lineWidth = 1.4;
           ctx.setLineDash([4, 6]);
           ctx.stroke();
@@ -248,7 +248,7 @@ export const UniverseCanvas: React.FC = () => {
 
         // A. Delicate Soft Ambient Shadow below bubble (spherical depth without weight)
         ctx.save();
-        ctx.shadowColor = 'rgba(140, 125, 115, 0.07)';
+        ctx.shadowColor = 'rgba(73, 54, 59, 0.06)';
         ctx.shadowBlur = r * 0.45;
         ctx.shadowOffsetX = 3;
         ctx.shadowOffsetY = r * 0.25;
@@ -267,11 +267,11 @@ export const UniverseCanvas: React.FC = () => {
           y,
           r
         );
-        coreGradient.addColorStop(0, 'rgba(255, 255, 255, 0.06)');
-        coreGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.015)');
-        coreGradient.addColorStop(0.82, 'rgba(240, 246, 255, 0.05)');
-        coreGradient.addColorStop(0.94, 'rgba(235, 245, 255, 0.12)');
-        coreGradient.addColorStop(1, 'rgba(255, 238, 245, 0.18)');
+        coreGradient.addColorStop(0, 'rgba(255, 252, 248, 0.08)');
+        coreGradient.addColorStop(0.5, 'rgba(255, 252, 248, 0.02)');
+        coreGradient.addColorStop(0.82, 'rgba(248, 229, 233, 0.06)');
+        coreGradient.addColorStop(0.94, 'rgba(239, 203, 213, 0.12)');
+        coreGradient.addColorStop(1, 'rgba(255, 240, 245, 0.18)');
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -286,12 +286,12 @@ export const UniverseCanvas: React.FC = () => {
         const ry2 = y + r * Math.sin(timeShift);
 
         const rimGradient = ctx.createLinearGradient(rx1, ry1, rx2, ry2);
-        rimGradient.addColorStop(0.00, 'rgba(248, 180, 196, 0.50)'); // Rose pink
-        rimGradient.addColorStop(0.22, 'rgba(157, 227, 236, 0.55)'); // Luminous cyan
-        rimGradient.addColorStop(0.48, 'rgba(252, 224, 155, 0.45)'); // Champagne gold
-        rimGradient.addColorStop(0.74, 'rgba(216, 197, 244, 0.55)'); // Delicate lilac
-        rimGradient.addColorStop(0.90, 'rgba(190, 234, 213, 0.45)'); // Pale mint
-        rimGradient.addColorStop(1.00, 'rgba(248, 180, 196, 0.50)'); // Rose pink loop
+        rimGradient.addColorStop(0.00, 'rgba(239, 203, 213, 0.65)'); // Powder pink
+        rimGradient.addColorStop(0.20, 'rgba(182, 232, 238, 0.55)'); // Luminous cyan
+        rimGradient.addColorStop(0.45, 'rgba(233, 216, 185, 0.55)'); // Pale champagne gold
+        rimGradient.addColorStop(0.70, 'rgba(201, 143, 164, 0.60)'); // Muted rose
+        rimGradient.addColorStop(0.88, 'rgba(157, 123, 138, 0.45)'); // Muted mauve
+        rimGradient.addColorStop(1.00, 'rgba(239, 203, 213, 0.65)'); // Powder pink loop
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -400,15 +400,15 @@ export const UniverseCanvas: React.FC = () => {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // Luminous diffused text shadow ensures readability on any canvas area
-        ctx.shadowColor = 'rgba(255, 255, 255, 0.95)';
+        // Luminous diffused pearl-white text shadow ensures readability on any canvas area
+        ctx.shadowColor = 'rgba(255, 252, 248, 0.98)';
         ctx.shadowBlur = 6;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
 
         // Truncate title cleanly to fit bubble interior
         let title = b.idea.title || 'Spark';
-        ctx.font = '600 13px "Quicksand", "Plus Jakarta Sans", sans-serif';
+        ctx.font = '600 13px "Quicksand", sans-serif';
         const maxTextWidth = r * 1.5;
 
         if (ctx.measureText(title).width > maxTextWidth) {
@@ -418,15 +418,15 @@ export const UniverseCanvas: React.FC = () => {
           title += '...';
         }
 
-        // Render deep charcoal title text
-        ctx.fillStyle = '#242220';
+        // Render deep cocoa title text
+        ctx.fillStyle = '#49363B';
 
         // If bubble is larger, render title slightly higher and handwritten cursive category underneath
         if (r > 62 && b.idea.category?.name) {
           ctx.fillText(title, x, y - 6);
 
-          ctx.font = '500 13px "Caveat", "Dancing Script", cursive';
-          ctx.fillStyle = '#6E675F';
+          ctx.font = 'italic 12px "Cormorant Garamond", "Dancing Script", serif';
+          ctx.fillStyle = '#876D75';
           ctx.shadowBlur = 4;
           let sub = b.idea.category.name;
           if (ctx.measureText(sub).width > maxTextWidth) {

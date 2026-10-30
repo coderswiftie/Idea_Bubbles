@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, GitFork, ArrowRight, Sparkles } from 'lucide-react';
+import { Plus, Trash2, GitFork, ArrowRight } from 'lucide-react';
 import { IdeaDetail } from '../../types';
 import { api } from '../../services/api';
 import { useIdeas } from '../../context/IdeaContext';
+import { PearlSparkle } from '../common/CoquetteBow';
 
 interface ConnectionsTabProps {
   idea: IdeaDetail;
@@ -36,7 +37,7 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
   };
 
   const handleDeleteConnection = async (connId: string) => {
-    if (confirm('Sever this idea connection?')) {
+    if (confirm('Sever this thought connection?')) {
       await api.deleteConnection(connId);
       refreshSelectedIdea();
       refreshConnections();
@@ -53,34 +54,34 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-serif text-base font-bold text-charcoal">Idea Connections</h3>
-          <p className="text-xs text-stone-400 font-sans">Discover thematic bridges and synergy across thoughts</p>
+          <h3 className="font-brand text-3xl font-bold text-cocoa">Thought Connections</h3>
+          <p className="font-editorial italic text-cocoa-muted text-sm">Discover thematic bridges and synergy across thoughts</p>
         </div>
         {!isAdding && candidateIdeas.length > 0 && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white border border-stone-200 hover:border-stone-300 text-charcoal hover:bg-stone-50 flex items-center gap-1.5 transition-all shadow-sm"
+            className="px-4 py-1.5 rounded-full text-xs font-semibold bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark flex items-center gap-1.5 transition-all shadow-sm"
           >
-            <Plus className="w-3.5 h-3.5 text-iridescent-lavender" />
-            <span>Connect Idea</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span className="font-editorial italic text-sm">Connect Thought</span>
           </button>
         )}
       </div>
 
       {/* Add Connection Form */}
       {isAdding && (
-        <form onSubmit={handleAddConnection} className="bg-white border border-stone-200/90 rounded-2xl p-4 space-y-3 shadow-sm">
+        <form onSubmit={handleAddConnection} className="bg-pearl/95 border border-powder/70 rounded-2xl p-4 space-y-3 shadow-sm">
           <div>
-            <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
-              Connect to idea
+            <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
+              Connect to thought
             </label>
             <select
               value={targetId}
               onChange={(e) => setTargetId(e.target.value)}
               required
-              className="w-full bg-[#FAF7F2] border border-stone-200 rounded-xl p-2.5 text-xs text-charcoal focus:outline-none focus:border-iridescent-lavender font-sans cursor-pointer"
+              className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa focus:outline-none focus:border-rose font-sans cursor-pointer"
             >
-              <option value="">-- Choose an idea to connect --</option>
+              <option value="">-- Choose a thought to connect --</option>
               {candidateIdeas.map((cand) => (
                 <option key={cand.id} value={cand.id}>
                   {cand.title} ({cand.category?.name || 'Uncategorized'})
@@ -91,13 +92,13 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
 
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
+              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
                 Relationship
               </label>
               <select
                 value={relationType}
                 onChange={(e) => setRelationType(e.target.value)}
-                className="w-full bg-[#FAF7F2] border border-stone-200 rounded-xl p-2.5 text-xs text-charcoal focus:outline-none focus:border-iridescent-lavender font-sans cursor-pointer"
+                className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa focus:outline-none focus:border-rose font-sans cursor-pointer"
               >
                 <option value="synergy with">Synergy with</option>
                 <option value="inspired by">Inspired by</option>
@@ -107,15 +108,15 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
               </select>
             </div>
             <div>
-              <label className="text-xs text-stone-400 block mb-1 font-editorial italic">
+              <label className="text-xs text-cocoa-muted block mb-1 font-editorial italic text-sm">
                 Connection note
               </label>
               <input
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Shared tech, theme, or concept..."
-                className="w-full bg-[#FAF7F2] border border-stone-200 rounded-xl p-2.5 text-xs text-charcoal placeholder-stone-400 focus:outline-none focus:border-iridescent-lavender font-sans"
+                placeholder="Shared theme or concept..."
+                className="w-full bg-ivory/80 border border-powder/70 rounded-xl p-2.5 text-xs text-cocoa placeholder-cocoa-faint focus:outline-none focus:border-rose font-sans"
               />
             </div>
           </div>
@@ -124,14 +125,14 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
             <button
               type="button"
               onClick={() => setIsAdding(false)}
-              className="px-3 py-1.5 rounded-lg text-xs text-stone-500 hover:text-charcoal"
+              className="px-3 py-1.5 rounded-lg text-xs text-cocoa-muted hover:text-cocoa font-sans"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!targetId}
-              className="px-4 py-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-xl text-xs font-semibold hover:opacity-95 disabled:opacity-50 shadow-sm"
+              className="px-4 py-1.5 bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark rounded-xl text-xs font-semibold disabled:opacity-50 shadow-sm"
             >
               Form Connection
             </button>
@@ -141,10 +142,10 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
 
       {/* Connections List */}
       {allConnections.length === 0 && !isAdding ? (
-        <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-stone-200 bg-white/50">
-          <GitFork className="w-8 h-8 text-stone-300 mx-auto mb-2" />
-          <p className="text-xs font-medium text-stone-600">No connections yet</p>
-          <p className="text-[11px] text-stone-400 mt-1">Connect this idea to related thoughts to draw constellations on the canvas.</p>
+        <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-powder/80 bg-pearl/60">
+          <PearlSparkle size={24} className="mx-auto mb-2 text-rose" />
+          <p className="text-xs font-medium text-cocoa font-sans">No connections yet</p>
+          <p className="text-[11px] text-cocoa-muted mt-1 font-editorial italic text-sm">Connect this thought to related ideas to draw constellations on the canvas.</p>
         </div>
       ) : (
         <div className="space-y-2.5">
@@ -157,26 +158,26 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
             return (
               <div
                 key={conn.id}
-                className="bg-white border border-stone-200/80 rounded-2xl p-4 flex items-center justify-between group hover:border-stone-300 transition-all shadow-sm"
+                className="bg-pearl border border-powder/70 rounded-2xl p-4 flex items-center justify-between group hover:border-rose/50 transition-all shadow-xs"
               >
                 <div
                   onClick={() => selectIdea(otherId)}
                   className="cursor-pointer flex-1 min-w-0 pr-3"
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium text-stone-600 bg-iridescent-lavender/15 px-2.5 py-0.5 rounded-full font-sans">
+                    <span className="text-xs font-medium text-cocoa bg-blush-200 border border-powder/60 px-2.5 py-0.5 rounded-full font-sans">
                       {conn.relationship_type || 'Related'}
                     </span>
-                    <span className="text-[11px] text-stone-400 font-sans">
+                    <span className="text-[11px] text-cocoa-muted font-sans">
                       {conn.isOutgoing ? 'outgoing' : 'incoming'}
                     </span>
                   </div>
-                  <h4 className="text-xs font-bold text-charcoal group-hover:text-stone-900 flex items-center gap-1.5 transition-colors truncate">
+                  <h4 className="text-xs font-bold text-cocoa group-hover:text-rose-dark flex items-center gap-1.5 transition-colors truncate">
                     <span>{otherTitle}</span>
-                    <ArrowRight className="w-3 h-3 text-stone-400 shrink-0" />
+                    <ArrowRight className="w-3 h-3 text-cocoa-muted shrink-0" />
                   </h4>
                   {conn.description && (
-                    <p className="text-[11px] text-stone-500 mt-0.5 truncate font-sans">
+                    <p className="text-[11px] text-cocoa-soft mt-0.5 truncate font-sans">
                       {conn.description}
                     </p>
                   )}
@@ -184,7 +185,7 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
 
                 <button
                   onClick={() => handleDeleteConnection(conn.id)}
-                  className="p-1.5 text-stone-400 hover:text-iridescent-pink rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="p-1.5 text-cocoa-muted hover:text-rose-dark rounded opacity-0 group-hover:opacity-100 transition-opacity"
                   title="Remove connection"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -197,3 +198,4 @@ export const ConnectionsTab: React.FC<ConnectionsTabProps> = ({ idea }) => {
     </div>
   );
 };
+

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Sparkles, Compass, Clock, ArrowRight, Loader2, RotateCcw } from 'lucide-react';
+import { Compass, Clock, ArrowRight, Loader2, RotateCcw } from 'lucide-react';
 import { RediscoverItem } from '../../types';
 import { api } from '../../services/api';
 import { useIdeas } from '../../context/IdeaContext';
+import { CoquetteBow, PearlSparkle } from '../common/CoquetteBow';
 
 export const RediscoverView: React.FC = () => {
   const { selectIdea } = useIdeas();
@@ -30,19 +31,21 @@ export const RediscoverView: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="font-handwriting text-3xl font-bold text-charcoal flex items-center gap-2.5">
-            <Sparkles className="w-5 h-5 text-iridescent-pink" />
-            <span>Rediscover Dormant Ideas</span>
-          </h2>
-          <p className="font-editorial italic text-stone-400 text-sm mt-0.5">
-            A gentle celestial observatory resurfacing forgotten thoughts when inspiration returns
+          <div className="flex items-center gap-3">
+            <CoquetteBow size={28} />
+            <h2 className="font-brand text-4xl font-bold text-cocoa">
+              Rediscover Dormant Thoughts
+            </h2>
+          </div>
+          <p className="font-editorial italic text-cocoa-muted text-base mt-1">
+            A quiet sanctuary resurfacing forgotten sparks when inspiration returns
           </p>
         </div>
 
         <button
           onClick={fetchRediscovery}
           disabled={loading}
-          className="p-2.5 rounded-full bg-white/90 border border-stone-200 text-stone-400 hover:text-charcoal shadow-sm transition-colors"
+          className="p-2.5 rounded-full bg-pearl/90 border border-powder/70 text-cocoa-muted hover:text-cocoa shadow-sm transition-colors"
           title="Refresh recommendations"
         >
           <RotateCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -51,69 +54,69 @@ export const RediscoverView: React.FC = () => {
 
       {/* Content */}
       {loading ? (
-        <div className="flex items-center justify-center py-24 text-stone-400 gap-2 font-sans">
-          <Loader2 className="w-5 h-5 animate-spin text-iridescent-pink" />
-          <span className="text-xs font-editorial italic text-sm">Observing idea constellations...</span>
+        <div className="flex items-center justify-center py-24 text-cocoa-muted gap-2 font-sans">
+          <Loader2 className="w-5 h-5 animate-spin text-rose" />
+          <span className="text-xs font-editorial italic text-base">Observing dormant thought constellations...</span>
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-20 bg-white/60 border border-dashed border-stone-200 rounded-2xl">
-          <Compass className="w-8 h-8 text-stone-300 mx-auto mb-2" />
-          <p className="font-serif text-base font-semibold text-charcoal">All thoughts are fresh and active</p>
-          <p className="font-editorial italic text-stone-400 mt-1 max-w-sm mx-auto text-sm">
+        <div className="text-center py-20 bg-pearl/60 border border-dashed border-powder/80 rounded-2xl">
+          <PearlSparkle size={26} className="mx-auto mb-2 text-rose" />
+          <p className="font-serif text-lg font-bold text-cocoa">All thoughts are fresh and active</p>
+          <p className="font-editorial italic text-cocoa-muted mt-1 max-w-sm mx-auto text-sm">
             As your universe expands and thoughts rest over time, this portal will gently surface forgotten sparks for you.
           </p>
         </div>
       ) : (
         <div className="space-y-4">
           {items.map((item) => {
-            const catColor = item.idea.category?.color_hex || '#B8A5E8';
+            const catColor = item.idea.category?.color_hex || '#C98FA4';
 
             return (
               <div
                 key={item.idea.id}
-                className="bg-white/90 border border-stone-200/80 p-5 rounded-2xl hover:border-stone-300 hover:shadow-[0_8px_30px_rgba(70,60,50,0.06)] transition-all group shadow-sm"
+                className="bg-pearl/90 border border-powder/70 p-5 rounded-2xl hover:border-rose/60 hover:shadow-[0_8px_30px_rgba(201,143,164,0.12)] transition-all group shadow-sm"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2.5">
                     {/* Soap Bubble Emblem */}
-                    <div className="w-5 h-5 rounded-full aspect-square border border-white/90 shadow-sm relative overflow-hidden bg-gradient-to-tr from-iridescent-pink/30 via-iridescent-cyan/30 to-iridescent-lavender/30 flex items-center justify-center shrink-0">
+                    <div className="w-5 h-5 rounded-full aspect-square border border-white/90 shadow-sm relative overflow-hidden bg-gradient-to-tr from-blush via-powder to-champagne-light flex items-center justify-center shrink-0">
                       <div className="w-1.5 h-1.5 rounded-full bg-white/90 absolute top-0.5 left-0.5" />
                       <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: catColor }} />
                     </div>
-                    <span className="text-xs font-medium text-stone-700 font-sans">
+                    <span className="text-xs font-semibold text-cocoa font-sans">
                       {item.idea.category?.name || 'Uncategorized'}
                     </span>
-                    <span className="text-xs text-stone-300">•</span>
-                    <span className="text-xs font-editorial italic text-stone-500">
+                    <span className="text-xs text-powder">•</span>
+                    <span className="text-xs font-editorial italic text-cocoa-muted">
                       {item.idea.status.toLowerCase().replace('_', ' ')}
                     </span>
                   </div>
 
                   {/* Why it is surfaced banner */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-medium font-sans">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blush-200 border border-powder text-rose-dark text-xs font-medium font-sans">
                     <Clock className="w-3.5 h-3.5 shrink-0" />
                     <span>{item.reason}</span>
                   </div>
                 </div>
 
-                <h3 className="font-serif text-lg font-bold text-charcoal group-hover:text-stone-900 mb-1.5">
+                <h3 className="font-serif text-lg font-bold text-cocoa group-hover:text-rose-dark mb-1.5">
                   {item.idea.title}
                 </h3>
-                <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-4 font-sans">
+                <p className="text-xs text-cocoa-soft line-clamp-2 leading-relaxed mb-4 font-sans">
                   {item.idea.raw_thought}
                 </p>
 
                 {/* Suggested Action Bar */}
-                <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-3 text-xs font-sans">
-                  <span className="text-stone-400 italic text-[11px]">
+                <div className="pt-3 border-t border-powder/40 flex items-center justify-between gap-3 text-xs font-sans">
+                  <span className="text-cocoa-muted italic text-[11px] font-editorial">
                     Suggestion: {item.suggested_action}
                   </span>
                   <button
                     onClick={() => selectIdea(item.idea.id)}
-                    className="px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-semibold flex items-center gap-1.5 transition-colors shrink-0 shadow-sm"
+                    className="px-4 py-1.5 rounded-full bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark font-semibold flex items-center gap-1.5 transition-colors shrink-0 shadow-sm text-xs"
                   >
                     <span>Nurture Spark</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-cocoa-muted" />
                   </button>
                 </div>
               </div>

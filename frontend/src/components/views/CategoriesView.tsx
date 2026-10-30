@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Edit2, Check, FolderTree, Tag } from 'lucide-react';
+import { Plus, Trash2, Edit2, Check, FolderTree } from 'lucide-react';
 import { useIdeas } from '../../context/IdeaContext';
 import { api } from '../../services/api';
+import { CoquetteBow } from '../common/CoquetteBow';
 
 const COLOR_PRESETS = [
-  '#F472B6', // Blush pink
-  '#38BDF8', // Pale cyan
-  '#A78BFA', // Subtle lavender
-  '#34D399', // Mint
-  '#FBBF24', // Champagne / Gold
-  '#FB7185', // Rose
-  '#818CF8', // Periwinkle
-  '#A8A29E', // Warm stone
+  '#EFCBD5', // Powder pink
+  '#C98FA4', // Muted rose
+  '#B6E8EE', // Luminous soft cyan
+  '#E9D8B9', // Champagne gold
+  '#D2F0E2', // Soft mint
+  '#9D7B8A', // Muted mauve
+  '#F8E5E9', // Soft blush
+  '#ECE3D4', // Warm ivory
 ];
 
 export const CategoriesView: React.FC = () => {
   const { categories, refreshCategories, refreshIdeas } = useIdeas();
   const [isAdding, setIsAdding] = useState(false);
   const [newCatName, setNewCatName] = useState('');
-  const [newCatColor, setNewCatColor] = useState('#A78BFA');
+  const [newCatColor, setNewCatColor] = useState('#EFCBD5');
   const [editingCatId, setEditingCatId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [editColor, setEditColor] = useState('');
@@ -55,7 +56,7 @@ export const CategoriesView: React.FC = () => {
   };
 
   const handleDelete = async (catId: string) => {
-    if (confirm('Delete this category? Ideas assigned to it will become uncategorized.')) {
+    if (confirm('Delete this collection? Ideas assigned to it will become uncategorized.')) {
       await api.deleteCategory(catId);
       refreshCategories();
       refreshIdeas();
@@ -67,40 +68,42 @@ export const CategoriesView: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="font-handwriting text-3xl font-bold text-charcoal flex items-center gap-2.5">
-            <FolderTree className="w-5 h-5 text-iridescent-gold" />
-            <span>Idea Categories</span>
-          </h2>
-          <p className="font-editorial italic text-stone-400 text-sm mt-0.5">
-            Organize and color-tint the clusters in your thought universe
+          <div className="flex items-center gap-3">
+            <CoquetteBow size={28} />
+            <h2 className="font-brand text-4xl font-bold text-cocoa">
+              Thought Collections
+            </h2>
+          </div>
+          <p className="font-editorial italic text-cocoa-muted text-base mt-1">
+            Organize and color-tint the delicate clusters in your thought universe
           </p>
         </div>
 
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-iridescent-lavender via-iridescent-pink/70 to-iridescent-cyan text-charcoal flex items-center gap-1.5 transition-all shadow-sm hover:opacity-95"
+            className="px-4 py-2 rounded-full text-xs font-semibold bg-blush-200 hover:bg-blush-300 border border-powder-dark text-cocoa flex items-center gap-1.5 transition-all shadow-sm"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span className="font-editorial italic text-sm">New Category</span>
+            <span className="font-editorial italic text-sm">New Collection</span>
           </button>
         )}
       </div>
 
       {/* Add Category Form */}
       {isAdding && (
-        <form onSubmit={handleCreate} className="bg-white/90 border border-stone-200/90 p-5 rounded-2xl mb-6 space-y-3 shadow-sm">
-          <h3 className="font-handwriting text-2xl font-bold text-charcoal">
-            Create Custom Category
+        <form onSubmit={handleCreate} className="bg-pearl/95 border border-powder/70 p-5 rounded-2xl mb-6 space-y-3 shadow-sm">
+          <h3 className="font-brand text-2xl font-bold text-cocoa">
+            Create Custom Collection
           </h3>
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <input
               type="text"
               value={newCatName}
               onChange={(e) => setNewCatName(e.target.value)}
-              placeholder="Category name (e.g. Creative Writing, Robotics)..."
+              placeholder="Collection name (e.g. Poetry, Romantic Philosophy, Art Projects)..."
               autoFocus
-              className="w-full bg-[#FAF7F2] border border-stone-200 rounded-xl px-3.5 py-2 text-xs text-charcoal placeholder-stone-400 focus:outline-none focus:border-iridescent-lavender font-sans"
+              className="w-full bg-ivory/80 border border-powder/70 rounded-xl px-3.5 py-2 text-xs text-cocoa placeholder-cocoa-faint focus:outline-none focus:border-rose font-sans"
             />
             {/* Color Presets */}
             <div className="flex items-center gap-1.5 shrink-0">
@@ -110,7 +113,7 @@ export const CategoriesView: React.FC = () => {
                   type="button"
                   onClick={() => setNewCatColor(color)}
                   className={`w-6 h-6 rounded-full border-2 transition-transform ${
-                    newCatColor === color ? 'scale-125 border-stone-600 shadow-sm' : 'border-transparent'
+                    newCatColor === color ? 'scale-125 border-cocoa shadow-sm' : 'border-white/80'
                   }`}
                   style={{ backgroundColor: color }}
                 />
@@ -121,16 +124,16 @@ export const CategoriesView: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsAdding(false)}
-              className="px-3.5 py-1.5 rounded-lg text-xs text-stone-500 hover:text-charcoal"
+              className="px-3.5 py-1.5 rounded-lg text-xs text-cocoa-muted hover:text-cocoa font-sans"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!newCatName.trim()}
-              className="px-4 py-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-xl text-xs font-semibold disabled:opacity-50 shadow-sm"
+              className="px-4 py-1.5 bg-blush-200 hover:bg-blush-300 text-cocoa border border-powder-dark rounded-xl text-xs font-semibold disabled:opacity-50 shadow-sm"
             >
-              Create Category
+              Save Collection
             </button>
           </div>
         </form>
@@ -141,7 +144,7 @@ export const CategoriesView: React.FC = () => {
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="bg-white border border-stone-200/80 p-4.5 rounded-2xl flex items-center justify-between group hover:border-stone-300 transition-all shadow-sm"
+            className="bg-pearl border border-powder/70 p-4.5 rounded-2xl flex items-center justify-between group hover:border-rose/50 hover:shadow-sm transition-all shadow-xs"
           >
             {editingCatId === cat.id ? (
               <div className="flex-1 flex items-center gap-2 mr-2">
@@ -149,7 +152,7 @@ export const CategoriesView: React.FC = () => {
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="w-full bg-[#FAF8F5] border border-iridescent-lavender rounded-xl px-2.5 py-1 text-xs text-charcoal focus:outline-none font-sans"
+                  className="w-full bg-ivory/80 border border-powder rounded-xl px-2.5 py-1 text-xs text-cocoa focus:outline-none font-sans"
                 />
                 <div className="flex items-center gap-1 shrink-0">
                   {COLOR_PRESETS.map((c) => (
@@ -158,7 +161,7 @@ export const CategoriesView: React.FC = () => {
                       type="button"
                       onClick={() => setEditColor(c)}
                       className={`w-4 h-4 rounded-full border ${
-                        editColor === c ? 'border-stone-700' : 'border-transparent'
+                        editColor === c ? 'border-cocoa' : 'border-transparent'
                       }`}
                       style={{ backgroundColor: c }}
                     />
@@ -166,7 +169,7 @@ export const CategoriesView: React.FC = () => {
                 </div>
                 <button
                   onClick={() => handleSaveEdit(cat.id)}
-                  className="p-1.5 bg-gradient-to-r from-iridescent-lavender to-iridescent-cyan text-white rounded-lg hover:opacity-90 shadow-sm"
+                  className="p-1.5 bg-blush-200 text-cocoa border border-powder rounded-lg hover:bg-blush-300 shadow-sm"
                 >
                   <Check className="w-3.5 h-3.5" />
                 </button>
@@ -178,10 +181,10 @@ export const CategoriesView: React.FC = () => {
                   style={{ backgroundColor: cat.color_hex }}
                 />
                 <div className="min-w-0">
-                  <h4 className="text-xs font-bold text-charcoal truncate font-sans">
+                  <h4 className="text-xs font-bold text-cocoa truncate font-sans">
                     {cat.name}
                   </h4>
-                  <p className="text-[10px] text-stone-400 font-sans">
+                  <p className="text-[10px] text-cocoa-muted font-sans">
                     {cat.idea_count || 0} {cat.idea_count === 1 ? 'thought' : 'thoughts'}
                   </p>
                 </div>
@@ -192,15 +195,15 @@ export const CategoriesView: React.FC = () => {
               <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => handleStartEdit(cat)}
-                  className="p-1.5 text-stone-400 hover:text-charcoal rounded-lg hover:bg-stone-100"
-                  title="Edit category"
+                  className="p-1.5 text-cocoa-muted hover:text-cocoa rounded-lg hover:bg-blush-100"
+                  title="Edit collection"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => handleDelete(cat.id)}
-                  className="p-1.5 text-stone-400 hover:text-iridescent-pink rounded-lg hover:bg-stone-100"
-                  title="Delete category"
+                  className="p-1.5 text-cocoa-muted hover:text-rose-dark rounded-lg hover:bg-blush-100"
+                  title="Delete collection"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>

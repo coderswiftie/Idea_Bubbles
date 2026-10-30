@@ -17,7 +17,7 @@ const MainLayout: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   return (
-    <div className="w-screen h-screen bg-ivory-50 text-charcoal font-sans flex flex-col overflow-hidden relative">
+    <div className="w-screen h-screen bg-pearl text-cocoa font-sans flex flex-col overflow-hidden relative">
       {/* Top Navigation */}
       <Navbar
         onOpenSearch={() => setIsSearchOpen(true)}

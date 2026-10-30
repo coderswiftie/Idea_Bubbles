@@ -7,68 +7,85 @@
 }
 
 body {
-  background-color: #FAF7F2;
-  color: #242220;
-  font-family: 'Quicksand', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #FFFCF8;
+  color: #49363B;
+  font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
   overflow: hidden;
   background-image: 
-    radial-gradient(circle at 18% 12%, rgba(248, 180, 196, 0.09) 0%, transparent 45%),
-    radial-gradient(circle at 82% 20%, rgba(157, 227, 236, 0.11) 0%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(216, 197, 244, 0.09) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(250, 247, 242, 0.8) 100%);
+    radial-gradient(circle at 12% 14%, rgba(248, 229, 233, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 18%, rgba(239, 203, 213, 0.35) 0%, transparent 48%),
+    radial-gradient(circle at 50% 88%, rgba(233, 216, 185, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 248, 0.98) 0%, rgba(245, 239, 229, 0.7) 100%);
   background-attachment: fixed;
 }
 
-/* Elegant Light Scrollbar */
+/* Elegant Romantic Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(240, 236, 230, 0.5);
+  background: rgba(248, 229, 233, 0.35);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(180, 175, 168, 0.4);
+  background: rgba(201, 143, 164, 0.35);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(150, 140, 130, 0.6);
+  background: rgba(201, 143, 164, 0.6);
 }
 
-/* Dreamy Light Glass Panels */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.78);
+/* Coquette Editorial Stationery Panels */
+.journal-card {
+  background: rgba(255, 252, 248, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(234, 230, 223, 0.85);
-  box-shadow: 0 4px 20px -2px rgba(90, 80, 70, 0.04), 0 2px 6px -1px rgba(90, 80, 70, 0.02);
+  border: 1px solid rgba(239, 203, 213, 0.55);
+  box-shadow: 0 4px 20px -2px rgba(73, 54, 59, 0.03), 0 2px 6px -1px rgba(73, 54, 59, 0.02);
+}
+
+.journal-card-elevated {
+  background: rgba(255, 252, 248, 0.95);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(239, 203, 213, 0.7);
+  box-shadow: 0 20px 45px -10px rgba(73, 54, 59, 0.07), 0 2px 8px 0 rgba(73, 54, 59, 0.02);
+}
+
+/* Backward compatibility for glass-panel helpers */
+.glass-panel {
+  background: rgba(255, 252, 248, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(239, 203, 213, 0.55);
+  box-shadow: 0 4px 20px -2px rgba(73, 54, 59, 0.03);
 }
 
 .glass-panel-elevated {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 252, 248, 0.95);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(230, 224, 215, 0.9);
-  box-shadow: 0 20px 45px -12px rgba(80, 70, 60, 0.08), 0 2px 8px 0 rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(239, 203, 213, 0.7);
+  box-shadow: 0 20px 45px -10px rgba(73, 54, 59, 0.07);
 }
 
-.glass-input {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(225, 220, 210, 0.9);
-  color: #242220;
+.journal-input {
+  background: rgba(255, 252, 248, 0.9);
+  border: 1px solid rgba(239, 203, 213, 0.65);
+  color: #49363B;
   transition: all 0.2s ease;
 }
 
-.glass-input:focus {
-  border-color: rgba(216, 197, 244, 0.9);
-  box-shadow: 0 0 16px -2px rgba(216, 197, 244, 0.45);
+.journal-input:focus {
+  border-color: rgba(201, 143, 164, 0.9);
+  box-shadow: 0 0 16px -2px rgba(239, 203, 213, 0.55);
   outline: none;
 }
 
-/* Subtle rainbow iridescent border sheen */
+/* Subtle pearl & powder iridescent ribbon sheen */
 .iridescent-border {
   position: relative;
 }
@@ -78,7 +95,7 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(248, 180, 196, 0.4), rgba(157, 227, 236, 0.4), rgba(216, 197, 244, 0.4), rgba(252, 224, 155, 0.35));
+  background: linear-gradient(135deg, rgba(239, 203, 213, 0.65), rgba(248, 229, 233, 0.7), rgba(233, 216, 185, 0.5), rgba(182, 232, 238, 0.45));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;

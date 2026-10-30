@@ -87,16 +87,16 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ onTranscript, clas
       title={isListening ? 'Stop voice recording' : 'Dictate idea via voice'}
       className={`relative p-2 rounded-full transition-all flex items-center justify-center ${
         isListening
-          ? 'bg-iridescent-pink text-white shadow-md animate-pulse'
-          : 'text-stone-400 hover:text-charcoal hover:bg-stone-100'
+          ? 'bg-rose text-white shadow-md animate-pulse'
+          : 'text-cocoa-muted hover:text-cocoa hover:bg-blush-100/70'
       } ${className}`}
     >
       {isListening ? (
         <>
           <Mic className="w-4 h-4" />
           <span className="absolute -top-1 -right-1 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-iridescent-pink opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-iridescent-pink"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose"></span>
           </span>
         </>
       ) : (
